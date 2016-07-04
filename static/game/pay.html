@@ -1,0 +1,305 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<link rel="stylesheet" type="text/css" href="css/public.css"/>
+		<link rel="stylesheet" type="text/css" href="css/game_index.css"/>
+		<script src="js/jquery-1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/appGame.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/game-1.0.js" type="text/javascript" charset="utf-8"></script>
+		<title>游戏中心页面</title>
+	</head>
+	<body>
+		<div class="g-content m_center">
+			<div class="game-nav">
+				<div class="nav-c m_center">
+					<div class="nav-logo fl">
+						<a class="logo-link" href="#">
+							<img class="logo-img" src="images/logo.png" alt="logo" />
+						</a>
+					</div>
+					<div class="nav-ul fl">
+						<a href="./index.html">首页</a>
+						<a href="./game_list.html">游戏中心</a>
+						<a href="./user_center.html">个人中心</a>
+						<a class="on" href="#">充值中心</a>
+						<a href="#">客服中心</a>
+						<a href="#">游戏论坛</a>
+					</div>
+					
+					<div class="nav-other fr">
+						<div class="nav-fav fl">
+							<a class="s-desk" href="javascript:;">
+								<i class="icon-base"></i>保存桌面
+							</a>
+							<a class="s-collect" href="javascript:;">
+								<i class="icon-base"></i>收藏首页
+							</a>
+						</div>
+						<div class="nav-login fl" style="display:none;">
+							<a href="javascript:;">登录</a>
+							<span>|</span>
+							<a href="javascript:;">注册</a>
+						</div>
+						<div class="nav-info fl" style="display:block;">
+							<img class="fl userimg" src="http://uc.douyutv.com/upload/avatar/face/201606/20/fc75a95d639426b4093a2791e7ab07d3_small.jpg" width="36" height="36" alt="" id="navInfoImg">							
+							<a class="fl username txt_overflow" href="javascript:;" title="火花易灭88" target="_blank">
+								火花易灭88SERERSD
+								<span class="icon-arrow"></span>
+							</a>
+						</div>
+						<div class="detail-info" style="display:none;">
+							<i class="tip-up">◆</i>
+							<dl class="info-data">
+								<dt>
+									<a href="javascript:;">火花易灭</a>
+								</dt>
+								<dd>
+									<a href="javascript:;">
+										<i class="icon-base icon-user"></i>
+										个人中心
+									</a>
+								</dd>
+								<dd>
+									<a href="javascript:;">
+										<i class="icon-base icon-pay"></i>
+										充值中心
+									</a>
+								</dd>
+								<dd>
+									<a href="javascript:;">
+										<i class="icon-base icon-exit"></i>
+										退出
+									</a>
+								</dd>
+							</dl>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+			
+			<div class="game-loading" style="display:none;"></div>
+			
+			
+			<div class="game-container m_center">
+				<div class="pay-account">充值账号：<span>火花易灭88</span><a href="javascript:;">［更换］</a></div>
+				<div class="pay-core clearfix">
+					<div class="pay-method fl">
+						<ul class="met-list clearfix">
+							<li>
+								<i class="icon-pay-method icon-pay-zfb"></i>
+								<span>支付宝</span>
+							</li>
+							<li class="current">
+								<i class="icon-pay-method icon-pay-wyzf"></i>
+								<span>网银支付</span>
+							</li>
+							<li>
+								<i class="icon-pay-method icon-pay-yl"></i>
+								<span>银联在线</span>
+							</li>
+							<li>
+								<i class="icon-pay-method icon-pay-weixin"></i>
+								<span>微信支付</span>
+							</li>
+						</ul>
+						<ul class="pay-help">
+							<li>
+								<a href="javascript:;">
+									<img src="http://shark.douyucdn.cn/app/douyu/activity/res/37wan/pay/p-ser.jpg?v=v41162.4"  />
+								</a>
+							</li>
+						</ul>
+						
+					</div>
+					<div class="pay-detail fr">
+						<div class="game-opt">
+							<a class="game-opt-btn fl" href="javascript:;">
+								<span class="fl">大皇帝</span>
+								<i class="icon-sanjiao-down fl"></i>
+							</a>
+							<a class="game-opt-btn fr" href="javascript:;">
+								<span class="fl">选择游戏服务器</span>
+								<i class="icon-sanjiao-down fl"></i>
+							</a>
+							<div class="game-opt-info game-current" style="display:none;">
+								<h4 class="game-opt-tit">
+									<a data-class="area-played" class="active" href="javascript:;">最近玩过的游戏</a>
+									<a date-class="area-games" href="javascript:;">全部游戏</a>
+								</h4>
+								<div class="game-opt-cnt">
+									<div class="sub-box all-games">
+										<div class="area-played">
+											<p class="sun-tips">没有最近玩过的游戏</p>
+											<ul class="game-con">
+												<li><a href="javascript:;">王者中心</a></li>
+												<li><a href="javascript:;">王者中心</a></li>
+												<li><a href="javascript:;">王者中心</a></li>
+												<li><a href="javascript:;">王者中心</a></li>
+												<li><a href="javascript:;">王者中心</a></li>
+												<li><a href="javascript:;">王者中心</a></li>
+												<li><a href="javascript:;">王者中心</a></li>
+												<li><a href="javascript:;">王者中心</a></li>
+												<li><a href="javascript:;">王者中心</a></li>
+												<li><a href="javascript:;">王者中心</a></li>
+												<li><a href="javascript:;">王者中心</a></li>
+												<li><a href="javascript:;">王者中心</a></li>
+											</ul>
+										</div>
+										<div class="area-games">
+											<ul class="game-con">
+												<li><a href="javascript:;">全部游戏</a></li>
+												<li><a href="javascript:;">王者中心</a></li>
+												<li><a href="javascript:;">王者中心</a></li>
+												<li><a href="javascript:;">王者中心</a></li>
+												<li><a href="javascript:;">王者中心</a></li>
+												<li><a href="javascript:;">王者中心</a></li>
+												<li><a href="javascript:;">王者中心</a></li>
+												<li><a href="javascript:;">王者中心</a></li>
+												<li><a href="javascript:;">王者中心</a></li>
+												<li><a href="javascript:;">王者中心</a></li>
+												<li><a href="javascript:;">王者中心</a></li>
+												<li><a href="javascript:;">王者中心</a></li>
+											</ul>
+										</div>
+									</div>
+									<div class="sub-box server-games">
+										<ul class="game-con">
+											<li><a href="javascript:;">游戏服务</a></li>
+											<li><a href="javascript:;">王者中心</a></li>
+											<li><a href="javascript:;">王者中心</a></li>
+											<li><a href="javascript:;">王者中心</a></li>
+											<li><a href="javascript:;">王者中心</a></li>
+											<li><a href="javascript:;">王者中心</a></li>
+											<li><a href="javascript:;">王者中心</a></li>
+											<li><a href="javascript:;">王者中心</a></li>
+											<li><a href="javascript:;">王者中心</a></li>
+											<li><a href="javascript:;">王者中心</a></li>
+											<li><a href="javascript:;">王者中心</a></li>
+											<li><a href="javascript:;">王者中心</a></li>
+										</ul>
+									</div>
+								</div>
+								<span class="icon-triangle-up"></span>
+							</div>
+						</div>
+						
+						
+						<div class="pay-money">
+							<h4 class="type-tips">请选择充值金额</h4>
+							<div class="money-con clearfix">
+								<span>10元</span>
+								<span class="current">20元</span>
+								<span>30元</span>
+								<span>40元</span>
+								<span>40元</span>
+								<span>40元</span>
+								<span>40元</span>
+								<span>40元</span>
+								<span>40元</span>
+								<span>40元</span>
+								<span>40元</span>
+								<span>40元</span>
+								<span>40元</span>
+								<span>40元</span>
+								<span>40元</span>
+								<span>40元</span>
+								<span>40元</span>
+								<span>40元</span>
+							</div>
+							<div class="other-pay">
+								<span>其他金额：</span>
+								<input type="text"  />
+								<span>元</span>
+								<em>（请输入10至100000之间的任意整数）</em>
+							</div>
+							<div class="vista-pay" style="display:none;">
+								<h4 class="type-tips">请选择充值金额</h4>
+								<div class="vista-type clearfix">
+									<span class="current">
+										<i class="icon-bank icon-gongshang"></i>
+										<em>工商银行</em>
+									</span>
+									<span>
+										<i class="icon-bank icon-zhaoshang"></i>
+										<em>招商银行</em>
+									</span>
+									<span>
+										<i class="icon-bank icon-china"></i>
+										<em>中国银行</em>
+									</span>
+									<span>
+										<i class="icon-bank icon-jianshe"></i>
+										<em>建设银行</em>
+									</span>
+									<span>
+										<i class="icon-bank icon-nongye"></i>
+										<em>农业银行</em>
+									</span>
+									<span>
+										<i class="icon-bank icon-jiaotong"></i>
+										<em>交通银行</em>
+									</span>
+									<span>
+										<i class="icon-bank icon-xingye"></i>
+										<em>兴业银行</em>
+									</span>
+									<span>
+										<i class="icon-bank icon-guangfa"></i>
+										<em>广发银行</em>
+									</span>
+									<span>
+										<i class="icon-bank icon-minsheng"></i>
+										<em>民生银行</em>
+									</span>
+									<span>
+										<i class="icon-bank icon-pingan"></i>
+										<em>平安银行</em>
+									</span>
+									<span>
+										<i class="icon-bank icon-EMS"></i>
+										<em>中国邮政</em>
+									</span>
+								</div>
+							</div>
+							<div class="pay-btn">
+								<a href="javascript:;" class="go-pay m_center">立即充值</a>
+							</div>
+						</div>
+						
+					</div>
+					<div class="pay-mask"></div>
+					<div class="pay-alert" onmousedown="XT.tool.limitDrag(this,event);">
+						<h4 class="title">
+							<span>订单超额</span>
+							<a class="close" href="javascript:;">×</a>
+						</h4>
+						<div class="tips-cnt">
+							<p class="content">您的订单已超出限额，微信支付单笔限额3000.00元</p>
+							<p class="s-tips">请选择其他金额，或更换充值方式</p>
+							<p class="btn-area">
+								<a class="btn-link m_center" href="javascript:;">返回修改</a>
+							</p>
+						</div>
+					</div>
+					<div class="ctrl-tips" style="display:none;">请选择游戏服务区</div>
+				</div>
+			</div>
+			<div class="game-footer">
+				<p class="nav-link">
+					<a href="javascript:;">中视直播</a> |
+					<a href="javascript:;">游戏中心</a> |
+					<a href="javascript:;">客服中心</a> |
+					<a href="javascript:;">家长监控</a>
+				</p>
+				<p>
+					<a href="javascript:;">皖网文(2012)0586-009号</a>&nbsp;&nbsp;<a href="javascript:;">ICP证 皖B2-20160015</a>
+				</p>
+				<p>抵制不良游戏　拒绝盗版游戏　注意自我保护　谨防受骗上当　适度游戏益脑　沉迷游戏伤身　合理安排时间　享受健康生活</p>
+			</div>
+		</div>
+	</body>
+</html>
