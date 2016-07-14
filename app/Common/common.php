@@ -82,3 +82,34 @@
 		}
 		return $str;
 	}
+
+	/**
+	 * 密码加密方法
+	 * @param string $pw 要加密的字符串
+	 * @return string
+	 */
+	function sp_password($pw,$salt=''){
+		// echo "$pw";echo "<br>"; echo $salt;
+		$result=md5(md5($pw) . $salt);
+		return $result;
+	}
+
+
+	/**
+	 * 密码比较方法,所有涉及密码比较的地方都用这个方法
+	 * @param string $password 要比较的密码
+	 * @param string $password_in_db 数据库保存的已经加密过的密码
+	 * @return boolean 密码相同，返回true
+	 */
+	function sp_compare_password($password,$password_in_db,$salt){
+	    return sp_password($password,$salt)==$password_in_db;
+	}
+
+	function verify_msg_code($phone,$code)  //核对短信验证码
+	{	
+		$key = 'game0058:verifcode:' .$phone;
+		$redis = CacheRedis::getInstance();
+		$res = $redis->get($key) == $code;
+		return $res;
+
+	}

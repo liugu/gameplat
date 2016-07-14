@@ -1,0 +1,49 @@
+/* Public */
+html,body{width:100%;height:100%;font-family:Microsoft YaHei,\5B8B\4F53,Arial,Verdana;_font-family:\5B8B\4F53;background:#e5e5e5;font-size:12px;color:#262626;}
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, form, input, button, textarea, p, th, td{margin:0;padding:0;}
+table{border-collapse:collapse;border-spacing:0;}
+fieldset,img,button,input{border:0;}
+address,em,cite,th,strong,i{font-style:normal;font-weight:normal;}
+ol,ul{list-style:none;}
+h1,h2,h3,h4,h5,h6{font-size:100%; font-weight:normal;}
+a{color:#262626;text-decoration:none !important;}
+img{display:block;vertical-align:top;}
+input,textarea{outline:none;font-family:"微软雅黑";background:none;}
+/*颜色相关*/
+.green{color:#468847 !important;}
+
+/*背景相关*/
+.bg-orange{background:#ff643a;}
+.bg-blue{background:#2693ff;}
+
+/*文字排版*/
+.f12{font-size:12px;}
+.f13{font-size:13px;}
+.f14{font-size:14px;}
+.f16{font-size:16px;}
+.f20{font-size:20px;}
+.fb{font-weight:bold;}
+/*定位*/
+.fl{float:left;display:inline;}
+.fr{float:right;display:inline;}
+.clearfix{*zoom:1;}
+.clearfix:after{display:block; overflow:hidden; clear:both; height:0; visibility:hidden; content:".";}
+.m_center{margin:0 auto;}
+.txt_overflow{word-spacing:keep-all;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+
+/*padding*/
+.pb20_ie7{*padding-bottom:20px;}
+
+/*最小高度*/
+.m-h-300{min-height:300px;}
+
+/*间距*/
+.mb4{margin-bottom:4px !important;}
+.mb35{margin-bottom:35px;}
+.mb50{margin-bottom:50px;}
+
+
+/*文本相关*/
+.tl{text-align:left;}
+.tr{text-align:right;}
+.tc{text-align:center;}

@@ -1,91 +1,39 @@
 <?php if (!defined('THINK_PATH')) exit();?>
-<link href="__TMPL__<?php echo ($config["THEME"]); ?>/css/user.css" rel="stylesheet" type="text/css" />
-<script>
-if (top.location.href!=window.location.href){
-    top.location.href = window.location.href;
-}
-</script>
-<style>
-.log_form ul li{margin-top:10px;}
-</style>
-<!--header-->
-<div id="login">
-  <div class="dh">你现在所在的位置：<a href="/">首页</a> &gt; <a href="/user/">用户中心</a> &gt; <span>用户登录</span></div>
-  <div class="log_form">
-      <form id="log_form_frame" target="_self" name="loginfrm" method="post" action="<?php echo U('accounts/checklogin');?>" autocomplete="off" >
-        <input type="hidden" name="game" value=""/>
-        <ul>   
-            <li>
-                <div id="errorHandel01">&nbsp;</div>
-                <label class="labela">帐　号：</label>
-                <input type="hidden" name="url" value="<?php echo ($url); ?>" />
-                <input type="text" maxlength="20" class="text ipt1" id="user_name" name="user_name">
-            </li>
-            <li>
-                <label class="labelb">密　码：</label>
-                <input type="password" maxlength="20" class="text ipt2" id="user_pwd" name="user_pwd">
-            </li>
-            <li>
-             <input name="" type="button"  id="login_cc" class="log_b" value=""  style="cursor:pointer"/>
-             </li>
-            <li>
-                <p class="links">还没有帐号？<a href="<?php echo U('Accounts/register');?>" class="reg_l" target="_blank"> 免费注册&gt;&gt;</a><a href="<?php echo U('accounts/forget_password');?>" class="lose_l">忘记密码？</a> </p>
-            </li>
-        
-        </ul>
-    </form>
-  </div><!--log_form-->
+<div class="login-page">
+	<div class="page-c m_center">
+		<div class="login-module">
+			<h3 class="top-tit"><span>用户登录</span></h3>
+			<div id="login_loading" class="login-loading">
+				<span class="tips">正在登录，请稍后...</span>
+			</div>
+			<div class="login-inp">
+				<div class="error-tips"></div>
+				<form id="login_form2"  method="post" action="#">
+					<p class="normal-box"><input name="user_name" placeholder="请输入昵称" type="text" /></p>
+					<p class="normal-box"><input name="user_pwd" placeholder="请输入密码" type="password" /></p>
+					<p class="normal-box inp-code">
+						<input name="user_verify" class="fl" placeholder="请输入验证码" type="text" maxlength="4" onkeydown="XT.login.keyDownLogin('go_login2',event);" />
+						<input type="hidden" name="type" value="1"  />
+						<input type="hidden" name="user_url" value="<?php echo ($url); ?>" />
+						<img class="code-img approve-img fl" src="/Public/verify/" onclick="XT.tool.refreshCode(this);" />
+					</p>
+				</form>
+				<p class="normal-text tr"><a target="_blank" href="<?php echo U('accounts/forget_password');?>">忘记密码？</a></p>
+				<p class="normal-box login-ctrl">
+					<a id="go_login2" class="go-login fl" href="javascript:void(0);" onclick="XT.login.enter('login_form2',1);">登录</a>
+				</p>
+				<p class="normal-text tc"><a href="javascript:void(0);" onclick="XT.login.show('reg');">还没有账号？立即注册</a></p>
+				<p class="normal-box last-inp">
+					<span>其他登录：</span>
+					<a href="javascript:alert('敬请期待');" class="icon-log icon-weixin"></a>
+					<a href="javascript:alert('敬请期待');" class="icon-log icon-qq" target="_blank" href="<?php echo U('open/index');?>"></a>
+					<a href="javascript:alert('敬请期待');" class="icon-log icon-sina"></a>
+				</p>
+			</div>
+		</div>
+	</div>
 </div>
 
-
-<script src="__TMPL__<?php echo ($config["THEME"]); ?>/js/jquery-1.4.2.js" type="text/javascript"></script>
-<script src="__TMPL__<?php echo ($config["THEME"]); ?>/js/dialog/jquery.artDialog.js?skin=default" type="text/javascript"></script>
-<script src="__TMPL__<?php echo ($config["THEME"]); ?>/js/dialog/plugins/iframeTools.js" type="text/javascript"></script>
-<script>
-$(document).ready(function(){
-	$('#login_cc').click(function(){
-		var $username = $('#user_name').val();
-		var $password = $('#user_pwd').val();
-		if($username.length<4||$password.length<5||$username==""||$password=="")
-			{
-			  $.dialog.alert('请完善你的账户信息再进行登录!');
-			  return false;
-			}
-		$.ajax({
-			type:'post',
-			data:$('#log_form_frame').serialize(),
-			url:"<?php echo U('Accounts/checklogin');?>",
-			error:function(){
-				$.dialog.alert('登陆发生错误,请稍候重试.');
-			},
-			cache: false,
-			dataType:'json',
-			success:function(data){
-				if(data.state!="1")
-					{
-					
-					   $.dialog({
-						   title:'提示信息',
-						   content:data.msg,
-						   ok:true,
-						   okVal:'确定',
-						   lock:true,
-						   icon:'face-sad'
-					   })
-					}
-				else
-				  {
-					
-					  $('body').append(data.script)
-					  $.dialog.tips(data.msg);
-					  if(data.returnu==""){
-					  setTimeout("window.location.href= '/'",2000);
-					  }else{
-						  window.location.href = data.returnu;
- 					  }
-				  }
-			}
-		});
-	})
-})
+<script type="text/javascript">
+	<?php if(($userinfo["username"]) != ""): ?>window.location.href = '/members/';<?php endif; ?>
 </script>

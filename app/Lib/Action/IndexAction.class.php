@@ -11,7 +11,17 @@
 	class IndexAction extends CommonAction
 	{
 	     public function index()
-	     {
+	     {	
+	     	 // print_r($_SESSION);
+	     	 // print_r($_COOKIE);die;
+
+	     	 // $Cache = Cache::getInstance('Redis');
+	     	 // $Cache->setOptions('temp','ThinkPHP1115');
+	     	 // $value = $Cache->getOptions('temp');
+	     	 // print_r($value);die;
+	     	// $redis = CacheRedis::getInstance();
+	     	// $redis->set('test','hellow s');
+	     	// echo $redis->get('test'); die;
 
 	     	 $public = A('Public');
 	     	 $public->read_conf(); 
@@ -30,10 +40,10 @@
 	     	 $cond['game.isdisplay'] = "0";
 	     	 if($config['GAME_SORT']=="0"){
 	     	 	
-	     	 $games_lists = $game->where($cond)->order('game.sort asc')->limit('8')->select();
+	     	 $games_lists = $game->where($cond)->order('game.sort asc')->limit('12')->select();
 	     	 }else{
 	     	 	
-	     	 $games_lists = $game->where($cond)->order('game.game_hit desc')->limit('8')->select(); 
+	     	 $games_lists = $game->where($cond)->order('game.game_hit desc')->limit('12')->select(); 
 	     	 }
 	     	 $this->assign('games_list',$games_lists);
 	     	 unset($games_lists);
@@ -42,6 +52,14 @@
 	     	 $ad = M('ad');
 	     	 $ad_list = $ad->where('type =2 and status =0 ')->order('addtime desc')->limit('3')->select();
 	     	 $this->assign('ad_list',$ad_list);
+
+	     	 $ad_list2 = $ad->where('type =17 and status =0 ')->order('addtime desc')->limit('3')->select();
+	     	 $this->assign('ad_list2',$ad_list2);
+
+	     	 $ad_list3 = $ad->where('type =18 and status =0 ')->order('addtime desc')->limit('3')->select();
+
+	     	 $this->assign('ad_list3',$ad_list3);
+	     	 
 	     	 #########热点########
 	     	 $article = M('article');
 	     	 $art['typeid'] = "9";

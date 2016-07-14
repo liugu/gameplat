@@ -52,6 +52,29 @@
 
      	 	$this->assign('hot_game',$hot_game);
      	 	$this->assign('type',$type);
+
+        $ad = M('ad');
+        $ad_list2 = $ad->where('type =17 and status =0 ')->order('addtime desc')->limit('3')->select();
+        $this->assign('ad_list2',$ad_list2);
+
+        $ad_list3 = $ad->where('type =18 and status =0 ')->order('addtime desc')->limit('3')->select();
+        $this->assign('ad_list3',$ad_list3);
+
+        #########新闻########
+        $article = M('article');
+        $art['typeid'] = "7";
+        $art['status'] = "0";
+        $a_list = $article->where($art)->order('addtime desc')->limit('5')->select();
+        $art['istop'] = "1";
+        $news_top = $article->where($art)->order('addtime desc')->limit('1')->select();
+        if($news_top==""){
+          $this->assign('news_top','1');
+        }else{
+          $this->assign('news_top',$news_top);
+        }
+        $this->assign('news',$a_list);
+        unset($a_list);
+        
      	 	
      	 	#####游戏记录查询######
      	 	if($this->userinfo['username']!=""){

@@ -1,92 +1,38 @@
 /*
-*≥ı ºªØ—˘ Ω
+ÂàùÂßãÂåñ
 */
-body, form, ul, li, p, dl, dd, dt ,h,td,th,h3{
-	margin: 0;
-	padding: 0;
-}
-body{
-	font-size:12px;
-	background:#8AB7D8 url(bg.jpg) center -80px no-repeat;
-	text-align:center;
-}
-li,ul{
-	list-style: none;
-} 
-TD {
-	color: #333333;
-	VERTICAL-ALIGN: top;
-} 
-input,textarea{
-	border:1px solid #ccc;
-}
-a {
-	color:#333;
-}
-a:link {
-	color:#333333;
-	text-decoration: none;
-}
-a:visited {
-	text-decoration: none;
-	color: #333333;
-}
-a:hover {
-	text-decoration: underline;
-	color: #4E667B;
-}
-a:active {
-	text-decoration: none;
-}
+html,body{width:100%;height:100%;font-family:Microsoft YaHei,\5B8B\4F53,Arial,Verdana;_font-family:\5B8B\4F53;font-size:12px;color:#262626;}
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, form, input, button, textarea, p, th, td{margin:0;padding:0;}
+table{border-collapse:collapse;border-spacing:0;}
+fieldset,img,button,input{border:0;}
+address,em,cite,th,strong,i{font-style:normal;font-weight:normal;}
+ol,ul{list-style:none;}
+h1,h2,h3,h4,h5,h6{font-size:100%; font-weight:normal;}
+a{color:#262626;text-decoration:none !important;}
+img{display:block;vertical-align:top;}
+input,textarea{outline:none;font-family:"ÂæÆËΩØÈõÖÈªë";background:none;}
+/*ÊµÆÂä®*/
+.fl{float:left;}
+.fr{float:right;}
+
+.h36{height:36px;}
+.pt10{padding-top:10px;}
+
+.m-center{margin:0 auto;}
+
+.bgfff{background:#fff;}
+
 /*
-*µ«¬ºøÚ
+*ÁôªÂΩïÊ°Ü
 */
-.LoginCont{
-	width:430px;
-	height:320px;
-	background:url(management.gif) center top no-repeat;
-	margin:200px auto 0 auto;
-}
-.LoginCont .left{
-	padding-top:130px;
-	width:300px;
-	vertical-align:middle;
-}
-.LoginCont .left .input,.LoginCont .left .yzm{
-	height:24px;
-	width:165px;
-	border:0;
-	background:url(input.gif) no-repeat;
-	margin-top:4px;
-	padding-left:3px;
-	line-height:24px;
-}
-.LoginCont .left .yzm{
-	width:80px;
-	background:url(yzm.gif) no-repeat;
-}
-.LoginCont .left img{
-	margin:6px 0 0 10px;
-}
-.LoginCont .left div{
-	height:35px;
-	overflow:hidden;
-}
-.LoginCont .left div span{
-	display:block;
-	float:left;
-	line-height:35px;
-}
-.LoginCont .left div span.word{
-	width:120px;
-	text-align:right;
-	padding-right:5px;
-	font-size:12px;
-	color:#FFF;
-}
-.LoginCont .right{
-	padding-top:135px;
-}
-.LoginCont .right .submit{
-	border:0;
-}
+
+body{background:url(login_bg.jpg) no-repeat center center #1d598f;}
+.admin-login{position:absolute;left:50%;top:50%;width:562px;height:414px;margin:-207px 0 0 -281px;}
+.admin-login .login-title{width:100%;height:162px;margin-bottom:59px;background:url(login_tit.png) no-repeat center center;}
+.admin-login .login-form{width:240px;height:auto;}
+.admin-login .cell-block{width:240px;margin-bottom:15px;border-radius:100px;overflow:hidden;}
+.admin-login .cell-block span{float:left;width:58px;height:36px;line-height:36px;font-size:14px;text-indent:16px;color:#b8b8b8}
+.admin-login .cell-block .input-text{float:left;height:36px;width:172px;line-height:36px;}
+.admin-login .login-btn{display:block;width:140px;height:40px;line-height:40px;text-align:center;font-size:20px;font-weight:bold;color:#fff;border-radius:100px;background:#66d354;letter-spacing:5px;cursor:pointer;}
+.admin-login .login-btn:hover{background:#6fee5b;}
+.admin-login .error-tips{font-size:14px;height:26px;line-height:26px;text-align:center;color:#f21c45;}

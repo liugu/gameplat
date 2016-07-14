@@ -31,7 +31,9 @@ class Page {
     // 分页的栏的总页数
     protected $coolPages   ;
     // 分页显示定制
-    protected $config  =    array('header'=>'条记录','prev'=>'上一页','next'=>'下一页','first'=>'第一页','last'=>'最后一页','theme'=>' %totalRow% %header% %nowPage%/%totalPage% 页 %upPage% %downPage% %first%  %prePage%  %linkPage%  %nextPage% %end%');
+    // protected $config  =    array('header'=>'条记录','prev'=>'上一页','next'=>'下一页','first'=>'第一页','last'=>'最后一页','theme'=>' %totalRow% %header% %nowPage%/%totalPage% 页 %upPage% %downPage% %first%  %prePage%  %linkPage%  %nextPage% %end%');
+
+    protected $config  =    array('header'=>'条记录','prev'=>'上一页','next'=>'下一页','first'=>'第一页','last'=>'最后一页','theme'=>'  %upPage%  %first%  %prePage%  %linkPage%  %nextPage% %end% %downPage%');
     // 默认分页变量名
     protected $varPage;
 
@@ -102,12 +104,14 @@ class Page {
         if ($upRow>0){
             $upPage     =   "<a href='".str_replace('__PAGE__',$upRow,$url)."'>".$this->config['prev']."</a>";
         }else{
+            // $upPage     =   "<a href='javascript:;'>上一页</a>";
             $upPage     =   '';
         }
 
         if ($downRow <= $this->totalPages){
             $downPage   =   "<a href='".str_replace('__PAGE__',$downRow,$url)."'>".$this->config['next']."</a>";
         }else{
+            // $downPage   =   "<a href='javascript:;'>下一页</a>";
             $downPage   =   '';
         }
         // << < > >>
@@ -140,13 +144,14 @@ class Page {
                 }
             }else{
                 if($this->totalPages != 1){
-                    $linkPage .= "&nbsp;<span class='current'>".$page."</span>";
+                    $linkPage .= "&nbsp;<a href='javascript:;' class='current'>&nbsp;".$page."&nbsp;</a>";
                 }
             }
         }
         $pageStr     =   str_replace(
             array('%header%','%nowPage%','%totalRow%','%totalPage%','%upPage%','%downPage%','%first%','%prePage%','%linkPage%','%nextPage%','%end%'),
             array($this->config['header'],$this->nowPage,$this->totalRows,$this->totalPages,$upPage,$downPage,$theFirst,$prePage,$linkPage,$nextPage,$theEnd),$this->config['theme']);
+
         return $pageStr;
     }
 

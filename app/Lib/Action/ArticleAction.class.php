@@ -1,8 +1,8 @@
 <?php
    /**
     * @name 文章控制器
-    * 
-    * @author lostman 
+    *
+    * @author lostman
     */
   class ArticleAction extends CommonAction{
   	public $config;
@@ -39,7 +39,7 @@
   		$this->display(TMPL_PATH.$this->config['THEME'].'/news.html');
   		$this->global->footer();
   	}
-  	
+
   	/**
   	 * @name 文章阅读
   	 */
@@ -55,7 +55,7 @@
   			$this->assign('info',$info);
   			$model->where($map)->setInc('hits','1');
   			$this->global->head();
-  			$this->display(TMPL_PATH.$this->config['THEME'].'/read.html');  
+  			$this->display(TMPL_PATH.$this->config['THEME'].'/read.html');
   			$this->global->footer();
   		}
   	}
@@ -78,5 +78,5 @@
   		$this->display(TMPL_PATH.$this->config['THEME'].'/category.html');
   	}
   }
-  
+
 ?>

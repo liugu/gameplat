@@ -9,7 +9,7 @@
    	   public $viewFields = array(
 
    	   		'category' => array('typename'),
-   	   		'article'  =>array('aid','title','typeid','titlecorlor','addtime','status','_on'=>'category.typeid=article.typeid')
+   	   		'article'  =>array('aid','title','typeid','titlecorlor','addtime','status','redirect','_on'=>'category.typeid=article.typeid')
    	   );
    }
 ?>

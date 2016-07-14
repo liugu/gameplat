@@ -30,5 +30,5 @@ $dbcharset = 'utf8';
 
 //Cookies设置
 $cookiepre = '0058wan_';
-$cookiedomain = '.gameplat.com';
+$cookiedomain = 'game.com';
 $cookiepath = '/';

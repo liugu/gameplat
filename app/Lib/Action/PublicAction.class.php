@@ -7,7 +7,7 @@
            * @access public 
            * 
            */
-		  class PublicAction extends Action
+		  class PublicAction extends CommonAction
 		  {
 			  	public function wirte_log_pay($log){
 			  	
@@ -18,7 +18,8 @@
 			  	}
 		  	    public function verify()
 		  	    {
-		  	    	import("ORG.Util.Image");	
+		  	    	import("ORG.Util.Image");
+		  	    	ob_end_clean();  
 		  	    	Image::buildImageVerify();
 		  	    }
 			  	public function write_conf()
@@ -78,6 +79,12 @@
 			  		$this->assign('config',$config);
 			  		$this->display(TMPL_PATH.$config['THEME'].'/footer.html');
 			  	}
+
+
+			  	public function reglogin_view()
+			  	{
+			  		$this->display(TMPL_PATH.$config['THEME'].'/default/reglogintpl.html');
+			  	}
 			  	
 			  	
 			  	/**
@@ -119,6 +126,46 @@
 			  		}
 			  		return $mail->Send() ? true : $mail->ErrorInfo;
 			  	}
-			  		
+
+			  	public function send_msg()  //发送短信验证码
+			  	{	
+			  		$phone  = trim($_REQUEST['phone_num']);
+			  		import("@.ORG.SMS189");
+			  		$sms_model = new SMS189();
+			  		// $code = substr(uniqid(rand()), -6);
+			  		// $sms_model::send_code($mobile, $code);
+
+			  		$space_time = 60;  // 一分钟内 允许发送一次
+
+			  		$redis = CacheRedis::getInstance();
+			  		$space = $redis->get('game0058:verifcode:space' .$phone);
+			  		if (!$space){
+			  		    
+			  		    import("@.ORG.SMS189");
+			  		    $sms_model = new SMS189();
+			  		    // $code = substr(uniqid(rand()), -6);
+			  		    $code = rand(100000,999999); //6位数字验证码
+			  		    $sms_model::send_code($phone, $code);
+
+			  		    $r = $redis->set('game0058:verifcode:' .$phone, $code);
+
+			  		    $redis->expire('game0058:verifcode:' .$phone, 60*10);
+			  		    $redis->set('game0058:verifcode:space' .$phone, 1);
+			  		    $redis->expire('game0058:verifcode:space' .$phone, 60*1);
+
+			  		    if ($r && $r['res_code'] == 0) {
+			  		        $arr = array('s' => 1, 'msg'=>'验证码发送成功！');
+			  		        die ( json_encode ( $arr ) );
+			  		    } else {
+			  		        $arr = array('s' => 0, 'msg' => '获取验证码失败,请稍后重试!');
+			  		        die ( json_encode ( $arr ) );
+			  		    }
+			  		} else {
+			  		    $arr = array('s' => 0, 'msg' => '请勿频繁操作');
+			  		    die ( json_encode ( $arr ) );
+
+			  		}
+			  	}
+	
 		  }
   

@@ -1,83 +1,84 @@
 <?php if (!defined('THINK_PATH')) exit();?>
-<link href="__TMPL__<?php echo ($config["THEME"]); ?>/css/games.css" rel="stylesheet" type="text/css" />
-<link href="__TMPL__<?php echo ($config["THEME"]); ?>/css/user.css" rel="stylesheet" type="text/css" />
+<!-- loading start-->
+<div class="game-loading" style="display:none;"></div>
+<!-- loading end -->
+<div class="user-info">
+	<div class="user-c m_center">
+		<div class="user-info-l fl">
+			<dl class="clearfix">
+				<dt class="fl"><img src="http://uc.douyutv.com/upload/avatar/face/201606/20/fc75a95d639426b4093a2791e7ab07d3_middle.jpg" /></dt>
+				<dd class="fl">
+					<h4>个人中心</h4>
+					<p>
+						<a href="javascript:;">您好：<?php echo ($info["nickname"]); ?></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="<?php echo U('accounts/loginout');?>">[退出]</a>
+					</p>
+				</dd>
+			</dl>
+		</div>
+		<div class="user-info-r fr">
+			<h4>最近登录的服务器</h4>
+			<ul>
+				<?php if(is_array($history)): $i = 0; $__LIST__ = $history;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$g_history): $mod = ($i % 2 );++$i;?><li><a href="javascript:;"> > <?php echo ($g_history["gamename"]); ?>　<?php echo ($g_history["sid"]); ?>服　<?php echo ($g_history["servername"]); ?></a></li><?php endforeach; endif; else: echo "" ;endif; ?>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="game-container mb50 m_center">
 
-<style>
-.readonly input { display:none; }
-.readonly select { display:none; }
-.readonly span { display:inline-block;}
-.readonly span { display:inline;}
-.readonly span a { margin-left:8px; }
-.editinfo input, .safe_box button {border:1px solid #CCC; text-indent:2px;}
-.editinfo input, .safe_box button {display:inline-block;}
-.editinfo input, .safe_box button {display:inline;}
-.editinfo input, .safe_box button { border:1px solid #CCC; text-indent:2px;}
-.editinfo input, .safe_box button { display:inline-block;}
-.editinfo input, .safe_box button { display:inline;}
-.safe_box button {margin-left:5px;color:#666;cursor:pointer;}
-.editinfo select {height: 22px;padding-top: 2px;text-align: left;}
-.editinfo select { height: 22px;padding-top: 2px;text-align: left;}
-.editinfo select { display:inline-block;}
-.editinfo select { display:inline;}
-.editinfo span { display:none; }
-.step6 .savebtn{ background: url("__TMPL__<?php echo ($config["THEME"]); ?>/images/stage/b1.jpg") repeat scroll -62px -299px transparent;border: medium none;height: 22px;margin: 2px 5px 0;text-align: center;width: 52px;}
-</style>
-<!--header-->
-<script type="text/javascript">
-    setInterval('showBanner()',15000);
+	<div class="user-center-bd m_center clearfix">
+		<div class="user-center-l clearfix fl">
+			<ul class="clearfix">
+				<li>
+					<a class="active" href="javascript:;">
+						<i class="icon-user icon-my-game"></i>
+						<span>我的游戏</span>
+					</a>
+				</li>
+				<li>
+					<a target="_blank" href="http://www.0058.com/servicecore/index">
+						<i class="icon-user icon-info"></i>
+						<span>修改个人信息</span>
+					</a>
+				</li>
+				<li>
+					<a target="_blank" href="http://www.0058.com/servicecore?t=pwd_find">
+						<i class="icon-user icon-pwd"></i>
+						<span>修改密码</span>
+					</a>
+				</li>
+				<li>
+					<a target="_blank" href="http://www.0058.com/servicecore/index">
+						<i class="icon-user icon-indulge"></i>
+						<span>防沉迷验证</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<div class="user-center-r m-h-300 fr">
+			<p style="display:none;" class="loginout-tips">您还没有登录，请先登录！</p>
+			<h3 class="my-game-tit"><span>我的游戏</span></h3>
+			<?php if(is_array($mygame)): $i = 0; $__LIST__ = $mygame;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$my_games): $mod = ($i % 2 );++$i;?><dl class="user-center-games">
+					<dt class="fl">
+						<a href="javascript:;">
+							<img src="/Public/Uploads/images/<?php echo ($my_games["gamepic"]); ?>"  />
+						</a>
+					</dt>
+					<dd class="fl">
+						<h4 class="g-tit-box">
+							<a class="fl small-tit" href="javascript:;"><?php echo ($my_games["gamename"]); ?></a>
+							<div class="game-tags fr">
+								<a href="javascript:;">新服推荐</a>
+								<a href="javascript:;">官网</a>
+								<a href="javascript:;">充值</a>
+							</div>
+						</h4>
+						<h5>最近玩过的服：</h5>
+						<p class="played-link clearfix">
+							<?php if(is_array($my_games["serverlist"])): $i = 0; $__LIST__ = $my_games["serverlist"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$my_servers): $mod = ($i % 2 );++$i;?><a href="javascript:;">> <?php echo ($my_servers["sid"]); ?>服 <?php echo ($my_servers["servername"]); ?></a><?php endforeach; endif; else: echo "" ;endif; ?>
+						</p>
+					</dd>
+				</dl><?php endforeach; endif; else: echo "" ;endif; ?>
+		</div>
+	</div>
 
-function showBanner(){
-    $(".banner_embed1").toggle();
-    $(".banner_embed2").toggle();
-}
-</script>
-
-<div class="u_box">
-  <div class="dh"> 你现在所在的位置：
-    <a href="/">首页</a> &gt; 
-    <a href="<?php echo U('members/index');?>">用户中心</a> &gt; 
-    <span>用户详细信息</span>
-     </div>
-<ul class="user_b">
-    <li class="on"><a class="b1" href="<?php echo U('members/index');?>">我的信息</a></li>
-    <li class=""><a href="<?php echo U('members/card');?>" class="b2">新手卡</a></li>
-      <!-- qq用户不用修改密码服务 -->
-        <li class=""><a href="<?php echo U('members/user_modifypwd');?>" class="b4">修改密码</a></li>
-    <li class=""><a href="<?php echo U('members/user_fcm');?>" class="b5">防沉迷系统</a></li>
-    <li><a class="b6" href="<?php echo U('accounts/loginout');?>">安全退出</a></li>
-</ul>
-  <div class="user_m step1">
-    <ul class="benUserInfo">
-      <li>Hi,
-          <b>
-             
-           <?php echo ($info["nickname"]); ?>  </b> <?php switch($info["from_soical"]): case "腾讯": ?><img src="__PUBLIC__/images/icon/qq.gif" width="16" height="16"/><?php break;?>
-             <?php case "新浪微博": ?><img src="__PUBLIC__/images/icon/sina.gif" width="16" height="16"/><?php break;?>
-             <?php case "人人网": ?><img src="__PUBLIC__/images/icon/renren.gif" width="16" height="16"/><?php break;?>
-             <?php case "豆瓣": ?><img src="__PUBLIC__/images/icon/douban.gif" width="16" height="16"/><?php break;?>
-             <?php case "Google": ?><img src="__PUBLIC__/images/icon/google.gif" width="16" height="16"/><?php break;?>
-             <?php case "MSN": ?><img src="__PUBLIC__/images/icon/msn.gif" width="16" height="16"/><?php break; endswitch;?>
-          <br />
-        欢迎光临<?php echo ($config["SITENAME"]); ?>用户中心！<br />
-        最新登录：<?php echo (date('Y年m月d日 H:i:s',$info["lastlogin_time"])); ?>
-               </li>
-      <li>
-        <h5>你玩过的游戏</h5>
-        <div class="wan history"> 
-         <?php if(is_array($history)): $i = 0; $__LIST__ = $history;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$v): $mod = ($i % 2 );++$i;?><a href="#" target="_blank">
-                <?php echo ($v["gamename"]); ?>
-            </a><?php endforeach; endif; else: echo "" ;endif; ?>
-        </div>
-      </li>
-      <li>
-        <h5>推荐你玩</h5>
-        <div class="wan tj"> 
-            <?php $_result=D('GameView')->order('server.start_time desc')->select(); if ($_result): $i=0;foreach($_result as $key=>$game):++$i;$mod = ($i % 2 );?><a href="<?php echo U('game/login');?>?game=<?php echo ($game["gid"]); ?>&server=<?php echo ($game["sid"]); ?>" target="_blank">
-               <?php echo ($game["gamename"]); ?>
-            </a><?php endforeach; endif;?>
-        </div>
-      </li>
-    </ul><!--benUserInfo-->
-  </div><!--user_m-->
-  <!--底部-->   
 </div>

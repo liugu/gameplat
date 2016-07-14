@@ -198,12 +198,13 @@
 		$data['isflash'] = $_POST['isflash'];
 		$data['ishot'] = $_POST['ishot'];
 		$article = M('article');
+
 		if($article->where($map)->save($data))
 		{
 			$this->error('操作成功!',U('Article/article_index'));
 		}
 		 
-		$this->error('操作失败!,please contcat administrator'.mysql_error());
+		$this->error('操作失败!,请联系管理员'.mysql_error());
 
        }
 	 public function del()

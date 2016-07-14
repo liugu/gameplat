@@ -7,7 +7,7 @@ class GlogViewModel extends ViewModel
   		
   'server'=>array('sid','servername','_on'=>'server.sid=game_log.sid'),
   		
-  'game' =>array('gid','gamename','_on'=>'game.gid=game_log.gid'),
+  'game' =>array('gid','gamename','game_web','game_payurl','game_guide','gamepic','smallpic','_on'=>'game.gid=game_log.gid'),
  ); 
 }
 ?>

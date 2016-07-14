@@ -6,7 +6,7 @@ class GameViewModel extends ViewModel
 
   'server'=>array('sid','servername','start_time','server_url','status','_type'=>'LEFT'), 
 
-   'game'=>array('gid','sort','gamename','tag','desc1','gamepic','game_web','gametype','_on'=>'game.gid=server.gid')
+   'game'=>array('gid','sort','gamename','tag','desc1','gamepic','smallpic','ordinarypic','game_web','gametype','_on'=>'game.gid=server.gid')
  ); 
 
 }

@@ -1,0 +1,109 @@
+<include file="Public:head" />
+<div class="game-container more-list m_center">
+	<div class="start-server mb35" style="display:none;">
+		<h4 class="module-title mb4">
+			<i class="icon-index icon-server"></i>
+			开服预告
+			<!-- <a href="javascript:;" target="_blank" title="更多开服列表" class="more">更多 &gt;</a> -->
+			<span class="line"></span>
+		</h4>
+		<h4 class="kf-tit">
+			<span class="g-name">游戏名称</span>
+			<span class="time">开服时间</span>
+			<span class="s-name">服务器名称</span>
+			<span class="ctrl">操作</span>
+		</h4>
+		<dl class="kf-list">
+			<dt class="g-name">
+				<img src="http://image.wan.douyu.com/www/images/game/mhj/16_16.jpg"  />
+				<a href="javascript:;">蓝月传奇</a>
+			</dt>
+			<dd class="g-time">06-29 10:00</dd>
+			<dd class="s-name"><a href="javascript:;">修仙4服 洪荒宇宙</a></dd>
+			<dd class="g-ctrl">
+				<a href="javascript:;">领取新手卡</a>
+				<a href="javascript:;">进入游戏</a>
+				<a href="javascript:;">进入官网</a>
+			</dd>
+		</dl>
+		<dl class="kf-list">
+			<dt class="g-name">
+				<img src="http://image.wan.douyu.com/www/images/game/mhj/16_16.jpg"  />
+				<a href="javascript:;">蓝月传奇</a>
+			</dt>
+			<dd class="g-time">06-29 10:00</dd>
+			<dd class="s-name"><a href="javascript:;">修仙4服 洪荒宇宙</a></dd>
+			<dd class="g-ctrl">
+				<a href="javascript:;">领取新手卡</a>
+				<a href="javascript:;">进入游戏</a>
+				<a href="javascript:;">进入官网</a>
+			</dd>
+		</dl>
+		<dl class="kf-list">
+			<dt class="g-name">
+				<img src="http://image.wan.douyu.com/www/images/game/mhj/16_16.jpg"  />
+				<a href="javascript:;">蓝月传奇</a>
+			</dt>
+			<dd class="g-time">06-29 10:00</dd>
+			<dd class="s-name"><a href="javascript:;">修仙4服 洪荒宇宙</a></dd>
+			<dd class="g-ctrl">
+				<a href="javascript:;">领取新手卡</a>
+				<a href="javascript:;">进入游戏</a>
+				<a href="javascript:;">进入官网</a>
+			</dd>
+		</dl>
+		<dl class="kf-list">
+			<dt class="g-name">
+				<img src="http://image.wan.douyu.com/www/images/game/mhj/16_16.jpg"  />
+				<a href="javascript:;">蓝月传奇</a>
+			</dt>
+			<dd class="g-time">06-29 10:00</dd>
+			<dd class="s-name"><a href="javascript:;">修仙4服 洪荒宇宙</a></dd>
+			<dd class="g-ctrl">
+				<a href="javascript:;">领取新手卡</a>
+				<a href="javascript:;">进入游戏</a>
+				<a href="javascript:;">进入官网</a>
+			</dd>
+		</dl>
+	</div>
+	<div class="start-server">
+		<h4 class="module-title mb4">
+			<i class="icon-index icon-server"></i>
+			已经开服
+			<!-- <a href="javascript:;" target="_blank" title="更多开服列表" class="more">更多 &gt;</a> -->
+			<span class="line"></span>
+		</h4>
+		<h4 class="kf-tit">
+			<span class="g-name">游戏名称</span>
+			<span class="time">开服时间</span>
+			<span class="s-name">服务器名称</span>
+			<span class="ctrl">操作</span>
+		</h4>
+		<volist name="serverlist" id = "game">
+			<dl class="kf-list">
+				<dt class="g-name">
+					<img src="/Public/Uploads/images/{$game.smallpic}"  />
+					<a href="{:U('game/login')}?game={$game.gid}&server={$game.sid}">{$game.gamename}</a>
+				</dt>
+				<dd class="g-time">{$game.start_time|date='m/d h:i',###}</dd>
+				<dd class="s-name"><a href="javascript:;">{$game.servername}</a></dd>
+				<dd class="g-ctrl">
+					<a href="javascript:void(0);">领取新手卡</a>
+					<a href="{:U('game/login')}?game={$game.gid}&server={$game.sid}">进入游戏</a>
+					<a href="javascript:void(0);">进入官网</a>
+				</dd>
+			</dl>
+		</volist>
+		<div class="page-num">
+			<!--<a class="first" href="javascript:;">上一页</a>
+			<a href="javascript:;">1</a>
+			<a href="javascript:;">2</a>
+			<a href="javascript:;">3</a>
+			<a href="javascript:;">4</a>
+			<a href="javascript:;">5</a>
+			<a class="last" href="javascript:;">下一页</a>-->
+			{$page}
+		</div>
+	</div>
+</div>
+<include file="Public:footer"/>

@@ -35,12 +35,30 @@
      	 {
      	 	$model = D('GlogView');
      	 	$user['game_log.username'] = $this->userinfo['username'];
-     	 	$history = $model->where($user)->order('game_log.logintime desc')->limit('3')->select();
+     	 	$history = $model->where($user)->order('game_log.logintime desc')->limit('5')->select();
+
      	 	if($history!=null){
      	 		$this->assign('history',$history);
      	 	}else{
      	 		$this->assign('history','0');
      	 	}
+
+        # 我的游戏
+        $mygame_pre = $model->where($user)->order('game_log.logintime desc')->limit('50')->select();
+        foreach ($mygame_pre as $key => $value) {
+           // $mygame[$value['gid']]['username'] = $value['username'];
+           $mygame[$value['gid']]['logintime'] = $value['logintime'];
+           $mygame[$value['gid']]['gid'] = $value['gid'];
+           $mygame[$value['gid']]['gamename'] = $value['gamename'];
+           $mygame[$value['gid']]['gamepic'] = $value['gamepic'];
+           $mygame[$value['gid']]['smalllpic'] = $value['smalllpic'];
+           $mygame[$value['gid']]['serverlist'][] = array('sid'=>$value['sid'],'servername'=>$value['servername']);
+        }
+        $mygame  = array_values($mygame);
+        $this->assign('mygame',$mygame);
+        unset($mygame);
+        unset($mygame_pre);
+
      	 	$this->assign('info',$this->userinfo);
      	 	$this->pc->head();
             $this->display(TMPL_PATH.$this->config['THEME'].'/member.html');
@@ -50,21 +68,39 @@
       	 public function user_modifypwd()
       	 {
       	 	if($_POST){
-      	 		if($_POST['password_old']!=""&&$_POST['login_password']==$_POST['relogin_pwd']||$_POST['relogin_pwd']!=""){
-      	 			
-      	 			list($uid, $username, $password, $email) = uc_user_login($this->userinfo['username'], $_POST['password_old']);
-      	 			if($uid > 0) {
-      	 				uc_user_edit($this->userinfo['username'], $_POST['password_old'], $_POST['relogin_pwd']);
-      	 				$this->success('更改成功');
-      	 				
-      	 			} elseif($uid == -1) {
-      	 				$this->error('用户不存在,或者被删除');
-      	 			} elseif($uid == -2) {
-      	 				$this->error('对不起，原密码错误');
-      	 		   	} else {
-      	 		     	$this->error('系统异常');
-      	 			}
+            if($_POST['password_old']!=""&&$_POST['login_password']==$_POST['relogin_pwd'] && $_POST['relogin_pwd']!=""){
+              $user_model = M('user',null);
+              $username = $this->userinfo['username'];
+              $user = $user_model->where(array('username'=>$username))->find();
+              $auth_passwd = sp_compare_password($_POST['password_old'], $user['password'],$user['salt']);
+
+              //测试代码  还原密码
+              // $password = sp_password(123456,c1e781);
+              // print_r($password);die;
+
+              if (!$auth_passwd) {
+                $this->error('对不起，原密码错误');
+              }
+
+              $salt = substr(uniqid(rand()), -6);
+              $password = sp_password($_POST['relogin_pwd'],$salt);
+              $data = array(
+                'password'=>$password,
+                'salt'=>$salt,
+                'user_type'=>'user',
+              );
+              $res =  $user_model->data($data)->where(array('id'=>$user['id']))->save();
+
+              if ($res) {
+                $this->success('更改成功');
+              }else{
+                $this->error('系统异常');
+              }
+
       	 		}else{
+              if ($_POST['login_password']!=$_POST['relogin_pwd']) {
+                $this->error('两次输入密码不一致');
+              }
       	 			$this->error('你提交的数据有误');
        	 		}
        	 	}

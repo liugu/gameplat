@@ -5,7 +5,7 @@
       'URL_CASE_INSENSITIVE' =>true,//URL不区分大小写
       '__TPL__'   =>__ROOT__.'/Web/Tpl',
       'URL_ROUTER_ON' => true,
-      'COOKIE_PREFIX' => 'ai7wan_',
+      'COOKIE_PREFIX' => '0058wan_',
       'URL_ROUTE_RULES' => array(
           'lists/:id' => 'Lists/index',
       	//  'hall' => array('Lists/index','id=1'),
@@ -27,6 +27,30 @@
     		'REQUIRE_AUTH_ACTION'       =>'',		// 默认需要认证操作
     		'GUEST_AUTH_ON'             =>false,    // 是否开启游客授权访问
     		'GUEST_AUTH_ID'             =>0,        // 游客的用户ID
+
+            /* 数据缓存设置 */
+            'DATA_CACHE_TIME'       => 0,      // 数据缓存有效期 0表示永久缓存
+            'DATA_CACHE_COMPRESS'   => false,   // 数据缓存是否压缩缓存
+            'DATA_CACHE_CHECK'      => false,   // 数据缓存是否校验缓存
+            'DATA_CACHE_PREFIX'     => '',     // 缓存前缀
+            'DATA_CACHE_TYPE'       => 'Redis',  // 数据缓存类型,支持:File|Db|Apc|Memcache|Shmop|Sqlite|Xcache|Apachenote|Eaccelerator
+            'REDIS_HOST'            =>'192.168.1.11',
+            'REDIS_PORT'            =>'6379',
+
+        /* 默认设定 */
+        // 'DEFAULT_M_LAYER'       =>  'Model', // 默认的模型层名称
+        // 'DEFAULT_C_LAYER'       =>  'Action', // 默认的控制器层名称
+        // 'DEFAULT_APP'           => '@',     // 默认项目名称，@表示当前项目
+        // 'DEFAULT_LANG'          => 'zh-cn', // 默认语言
+        // 'DEFAULT_THEME'         => '',  // 默认模板主题名称
+        // 'DEFAULT_GROUP'         => 'Home',  // 默认分组
+        // 'DEFAULT_MODULE'        => 'Index', // 默认模块名称
+        // 'DEFAULT_ACTION'        => 'index', // 默认操作名称
+        // 'DEFAULT_CHARSET'       => 'utf-8', // 默认输出编码
+        // 'DEFAULT_TIMEZONE'      => 'PRC', // 默认时区
+        // 'DEFAULT_AJAX_RETURN'   => 'JSON',  // 默认AJAX 数据返回格式,可选JSON XML ...
+        // 'DEFAULT_JSONP_HANDLER' => 'jsonpReturn', // 默认JSONP格式返回的处理方法
+        // 'DEFAULT_FILTER'        => 'htmlspecialchars', // 默认参数过滤方法 用于 $this->_get('变量名');$this->_post('变量名')...
     );
     
     $newglobal = array_merge($global,$app);

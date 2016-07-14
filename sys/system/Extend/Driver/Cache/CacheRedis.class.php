@@ -48,6 +48,24 @@ class CacheRedis extends Cache {
             $this->handler->$func($options['host'], $options['port'], $options['timeout']);
     }
 
+
+
+    /**
+     * redis实例
+     */
+    static function getInstance() {
+
+        $options = array (
+            'host'          => C('REDIS_HOST') ? C('REDIS_HOST') : '127.0.0.1',
+            'port'          => C('REDIS_PORT') ? C('REDIS_PORT') : 6379,
+        );
+
+        //连接Redis 服务
+        $redis = new Redis();
+        $redis->connect($options['host'], $options['port']);
+        return $redis;
+    }
+
     /**
      * 读取缓存
      * @access public

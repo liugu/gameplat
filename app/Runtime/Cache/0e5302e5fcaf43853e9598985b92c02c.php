@@ -1,21 +1,15 @@
 <?php if (!defined('THINK_PATH')) exit();?>
-<link href="__TMPL__<?php echo ($config["THEME"]); ?>/css/games.css" rel="stylesheet" type="text/css" />
-<link href="__TMPL__<?php echo ($config["THEME"]); ?>/css/user.css" rel="stylesheet" type="text/css" />
 <link href="__TMPL__<?php echo ($config["THEME"]); ?>/css/kefu.css" rel="stylesheet" type="text/css" />
 <!--header-->
- 
 <div class="main">
   <div class="banner_t"><img src="__TMPL__<?php echo ($config["THEME"]); ?>/images/stage/upload/banner2.jpg" width="918" height="123" /></div>
   <ul class="user_b">
-    <li class="ques on"><a onclick="javascript:;" class="b1">常见问题</a></li>
+    <!--<li class="ques on"><a onclick="javascript:;" class="b1">常见问题</a></li>
     <li class=""><a href="/service" onclick="javascript:;" class="b2" target="_blank">在线客服</a></li>
-    <!--li class=""><a href="kefu/?_c=pwd" class="b3">密码申诉</a></li-->
-    <li class="parent "><a onclick="javascript:;" class="b4">家长监护</a></li>
-    <li class="process "><a class="b5" onclick="javascript:;">服务申请</a></li>
+    <li class=""><a href="kefu/?_c=pwd" class="b3">密码申诉</a></li>-->
+    <li class="parent on"><a onclick="javascript:;" class="b4">家长监护</a></li>
+    <!--<li class="process "><a class="b5" onclick="javascript:;">服务申请</a></li>-->
 </ul>
-
-<script src="__TMPL__<?php echo ($config["THEME"]); ?>/js/jquery-1.4.2.js"></script>
-<script src="__TMPL__<?php echo ($config["THEME"]); ?>/js/stage/plat_action.js"></script>
 <script type="text/javascript">
 $(".ques").click(function(){
     $('.user_b li').removeClass("on");
@@ -39,23 +33,23 @@ $(".process").click(function(){
     $(".processbody").show();
 });
 </script>
-  <div class="quesbody" style="display:block">
+  <div class="quesbody" style="display:none">
   <div class="user_m step1">
     <dl>
       <dt>如何创建我的个人帐号？</dt>
-      <dd>在31wan平台首页的用户登录窗口，点击绿色的免费<a href="/accounts/register">注册</a>按钮，进入注册页面填写完善个人帐号信息之后，您将免费获得您的31wan帐号，开始体验精彩游戏。</dd>
+      <dd>在0058游戏互动平台首页的用户登录窗口，点击蓝色的免费<a href="/accounts/register">注册</a>按钮，进入注册页面填写完善个人帐号信息之后，您将免费获得您的0058游戏互动帐号，开始体验精彩游戏。</dd>
     </dl>
     <dl>
       <dt>如何修改个人资料？</dt>
-      <dd>登录31wan平台成功后进入"<a href="/accounts/register">用户中心</a>"，可以看到个人资料，点击各项资料后面的修改即可对基本信息进行修改。注意：帐号和邮箱在注册后不可再修改，游戏中的昵称可以在第一次进入游戏时输入，之后也是不可更改的，并且是唯一的！。</dd>
+      <dd>登录0058游戏互动平台成功后进入"<a href="/accounts/register">用户中心</a>"，可以看到个人资料，点击各项资料后面的修改即可对基本信息进行修改。注意：帐号和邮箱在注册后不可再修改，游戏中的昵称可以在第一次进入游戏时输入，之后也是不可更改的，并且是唯一的！。</dd>
     </dl>
     <dl>
       <dt>帐号被盗怎么办？</dt>
-      <dd>在31wan平台首页的用户登录窗口，通过"找回密码"功能可以找回您的密码，同时建议您重新修改密码并加大密码强度。</dd>
+      <dd>在0058游戏互动平台首页的用户登录窗口，通过"找回密码"功能可以找回您的密码，同时建议您重新修改密码并加大密码强度。</dd>
     </dl>
     <dl>
       <dt>如何保证帐号及个人资料游戏数据安全？</dt>
-      <dd>31wan平台为帐号安全提供三重保护：1）邮箱认证 2）设置安全问题 3）身份证认证。注册通行证时，请务必设定较高级别的密码强度并填写个人常用邮箱。注册完通行证后，强烈建议您在"用户中心"完善安全个人信息和身份证信息，并设置密保问题。</dd>
+      <dd>0058游戏互动平台为帐号安全提供三重保护：1）邮箱认证 2）设置安全问题 3）身份证认证。注册通行证时，请务必设定较高级别的密码强度并填写个人常用邮箱。注册完通行证后，强烈建议您在"用户中心"完善安全个人信息和身份证信息，并设置密保问题。</dd>
     </dl>
     <dl>
       <dt>为何已实名认证，登录时仍有防沉迷提示？</dt>
@@ -65,7 +59,7 @@ $(".process").click(function(){
 </div><!--问题question-->
 
 <!--家长parent-->
-<div class="parentbody" style="display:none">
+<div class="parentbody" style="display:block">
     <div class="user_m step4">
         <div class="about">
             <h3>
@@ -80,7 +74,7 @@ $(".process").click(function(){
             <div class="parent_more" id="benParentMore" style="display:none;">
                     该项社会公益行动充分反映了中国网络游戏行业高度的社会责任感，对未成年玩家合法权益的关注及对用实际行动营造和谐社会的愿望。
                 <br />
-                    "家长监护机制"是31wan在这一公益行动中，针对目前未成年人缺乏自控及自律能力，容易陷入沉迷；少数监护人缺少时间照顾未成年人，不能及时监督未成年人游戏时间的现状，而推出的一种可由家长实施监控，纠正部分未成年子女沉迷游戏的保护机制。
+                    "家长监护机制"是0058游戏互动在这一公益行动中，针对目前未成年人缺乏自控及自律能力，容易陷入沉迷；少数监护人缺少时间照顾未成年人，不能及时监督未成年人游戏时间的现状，而推出的一种可由家长实施监控，纠正部分未成年子女沉迷游戏的保护机制。
                 <br />
                 <br />
                 <strong>
@@ -118,13 +112,13 @@ $(".process").click(function(){
                 申请表单下载
             </a>
             <strong>
-           
-                    表单内容：           
-                </a> 
+
+                    表单内容：
+                </a>
             </strong>
             <p> <a  href="kefu/static/zip/Guardian.zip">
-                附件表一：监护人信息表 
-                </a>           
+                附件表一：监护人信息表
+                </a>
             </p>
             <p> <a  href="kefu/static/zip/ward.zip">
                 附件表二：被监护人信息表
@@ -142,12 +136,7 @@ $(".process").click(function(){
             <p class="i1">
                 <strong>
                     咨询热线：                </strong>
-                400-9966-163
-            </p>
-            <p class="i2">
-                <strong>
-                    传真电话：                </strong>
-                020-85559051
+                0551-6856220
             </p>
             <p class="i3">
                 <strong>
@@ -163,12 +152,12 @@ $(".process").click(function(){
             <p class="ask">
                 如何创建我的个人帐号？            </p>
             <p class="q">
-                在QQ163平台首页的用户登录窗口，点击绿色的免费注册按钮，进入注册页面填写完善个人帐号信息之后，您将免费获得您的QQ163帐号，开始体验精彩游戏。
+                在0058游戏互动平台首页的用户登录窗口，点击蓝色的注册按钮，进入注册页面填写完善个人帐号信息之后，您将免费获得您的0058游戏互动帐号，开始体验精彩游戏。
             </p>
             <p class="ask">
                 如何创建我的个人帐号？            </p>
             <p class="q">
-                在QQ163平台首页的用户登录窗口，点击绿色的免费注册按钮，进入注册页面填写完善个人帐号信息之后，您将免费获得您的QQ163帐号，开始体验精彩游戏。
+                在0058游戏互动平台首页的用户登录窗口，点击蓝色的注册按钮，进入注册页面填写完善个人帐号信息之后，您将免费获得您的0058游戏互动帐号，开始体验精彩游戏。
             </p>
         </div>
     </div>
@@ -189,7 +178,7 @@ $(".process").click(function(){
                 护人提出申请
             </strong>
             <br>
-                在监护人发现被监护人有沉溺QQ163网页游戏的情况下，监护人可向游国公司申请发起未成年人家长监护机制。            <br>
+                在监护人发现被监护人有沉溺0058游戏互动网页游戏的情况下，监护人可向游国公司申请发起未成年人家长监护机制。            <br>
                 监护人需亲自通过邮寄方式 向我司提供有效材料，向游国公司提出未成年人账户监控的申请。在收到邮件后，我司即开始启动监护机制审核流程，首先进入疑似帐号身份确认期。
             <br>
             疑似帐号身份确认期（15 个自然日）            <br>

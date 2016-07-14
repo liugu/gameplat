@@ -6,7 +6,7 @@
        * 
        * @todo RBAC
        */
-Vendor('Ucenter.UcApi');
+       Vendor('Ucenter.UcApi');
 
        class CommonAction extends Action
        {
@@ -49,7 +49,7 @@ Vendor('Ucenter.UcApi');
        	   	   return $mylist;
             }
        	   public function _initialize()
-       	   {
+       	   {   
        	   	$map['ip'] = get_client_ip();
        	   	$model = M('web_not_allow_ip');
        	   	$st = $model->where($map)->find();
@@ -62,7 +62,7 @@ Vendor('Ucenter.UcApi');
        	   	// 用户权限检查
        	   	if (C('USER_AUTH_ON') && !in_array(MODULE_NAME, explode(',', C('NOT_AUTH_MODULE')))) {
        	   		import('@.ORG.Util.RBAC');
-       	   		if (!$_SESSION['user']) {
+       	   		if (!$_SESSION['user'] || !in_array($_SESSION['role_id'], array(1,11,12,16))) {
        	   			redirect(U('Public/login'));
        	   			unset($_SESSION['user']);
        	   		}

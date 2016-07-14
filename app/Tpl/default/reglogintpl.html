@@ -1,0 +1,98 @@
+﻿<div class="common-mask"></div>
+<div id="enter_popup" class="login-popup">
+	<div class="login-title clearfix" onclick="XT.login.methodToggle(event);">
+		<span data-type="phone" class="on" >手机号登录</span>
+		<span data-type="username">用户名登录</span>
+		<a href="javascript:;" class="close" onclick="XT.login.close(this);">×</a>
+	</div>
+	<div class="login-content">
+		<div class="login-type">
+			<a href="javascript:alert('敬请期待');" class="i-sina"></a>
+			<a href="javascript:alert('敬请期待');" class="i-weixin"></a>
+			<a href="javascript:alert('敬请期待');" class="i-qq"></a>
+			<span>or</span>
+		</div>
+		<div class="login-error error-tips"></div>
+		<form id="login_form3" method="post" action="#" class="popup-form">
+			<div class="normal-block login-account clearfix">
+				<label class="tips-txt">手机号码</label>
+				<input name="user_name" class="enter-input" type="text" value="" placeholder="请输入手机号码"  />
+				<input type="hidden" name="type" value="2" />
+			</div>
+			<div class="normal-block clearfix">
+				<label class="tips-txt">密<i class="pw-dot"></i> 码</label>
+				<input class="enter-input" name="user_pwd" type="password" value="" placeholder="请输入密码"  />
+			</div>
+			<div class="normal-block code-block clearfix">
+				<label class="tips-txt">验<i class="code-dot"></i>证<i class="code-dot"></i>码</label>
+				<input name="user_verify" class="enter-input" type="text" value="" maxlength="4" placeholder="请输入验证码" onkeydown="XT.login.keyDownLogin('go_login3',event);"  />
+				<input type="hidden" name="user_url" value="{$url}" />
+				<img class="prove-code approve-img fl" src="/Public/verify/" onclick="XT.tool.refreshCode(this);"  />
+			</div>
+			<div class="normal-block tc no-border padding-none clearfix">
+				<p class="clearfix tr">
+					<a class="forget-pw" href="javascript:;">忘记密码？</a>
+				</p>
+				<p class="log-reg-btn tc">
+					<a id="go_login3" class="login-btn bg-orange" href="javascript:;" onclick="XT.login.enter('login_form3',2);">登 录</a>
+				</p>
+				<p class="reg-text">
+					没有账号？<a id="just_reg" href="javascript:;" onclick="XT.login.popupToggle('reg')">5秒立即注册</a>
+				</p>
+			</div>
+		</form>
+	</div>
+</div>
+<div id="register_popup" class="login-popup register-popup">
+	<div class="login-title clearfix" onclick="XT.login.methodToggle(event);">
+		<span data-type="phone" class="on" >手机号注册</span>
+		<span data-type="username">用户名注册</span>
+		<a href="javascript:;" class="close" onclick="XT.login.close(this);">×</a>
+	</div>
+	<div class="login-content">
+		<div class="login-error error-tips"></div>
+		<form id="register_form" method="post" action="#" class="popup-form">
+			<div class="normal-block login-account clearfix">
+				<label class="tips-txt">手机号码</label>
+				<input name="user_name" class="enter-input" type="text" value="" placeholder="请输入手机号码"  />
+				<input type="hidden" name="type" value="2"  />
+			</div>
+			<div class="normal-block clearfix">
+				<label class="tips-txt">密<i class="pw-dot"></i> 码</label>
+				<input name="user_pwd" class="enter-input" type="password" value="" placeholder="请输入密码"  />
+			</div>
+			<div class="normal-block clearfix">
+				<label class="tips-txt">确认密码</label>
+				<input name="user_repwd" class="enter-input" type="password" value="" placeholder="请输入密码"  />
+				<input type="hidden" name="user_url" value="{$url}" />
+			</div>
+			<div id="yzmCodeBlock"></div>
+			<div id="msgProveBlock" class="normal-block code-block clearfix">
+				<label class="tips-txt">短信验证</label>
+				<input name="approve_code" class="enter-input" type="text" value="" placeholder="请输入验证码" maxlength="6" />
+				<a class="get-code" href="javascript:;" onclick="XT.tool.getcode('register_form',this);">获取验证码</a>
+			</div>
+			<div class="normal-block no-border padding-none clearfix">
+				<p class="clearfix tl">
+					<label class="nor-text" for="check-agree">
+						<input name="is_agree" class="sel-input" value="1" type="checkbox" id="check-agree" checked="checked" onclick="this.checked?this.value=1:this.value=0" />&nbsp;同意
+					</label>
+					<a class="forget-pw" href="javascript:;" onclick="XT.tool.seepact();">《中国视频娱乐网服务使用协议》</a>
+				</p>
+				<p class="log-reg-btn tc">
+					<a class="reg-btn bg-blue" href="javascript:;" onclick="XT.login.goReg('register_form');">注 册</a>
+				</p>
+				<p class="reg-text tc">
+					已有中视账号？<a id="just_login" href="javascript:;" onclick="XT.login.popupToggle('login');">马上登录</a>
+				</p>
+			</div>
+		</form>
+		<div class="login-type reg-type">
+			<a href="javascript:alert('敬请期待');" class="i-sina"></a>
+			<a href="javascript:alert('敬请期待');" class="i-weixin"></a>
+			<a href="javascript:alert('敬请期待');" class="i-qq"></a>
+			<span>or</span>
+		</div>
+		
+	</div>
+</div>

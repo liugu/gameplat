@@ -1,0 +1,570 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<link rel="stylesheet" type="text/css" href="css/public.css"/>
+		<link rel="stylesheet" type="text/css" href="css/game_index.css"/>
+		<script src="js/jquery-1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/appGame.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/game-1.0.js" type="text/javascript" charset="utf-8"></script>
+		<title>游戏中心页面</title>
+	</head>
+	<body>
+		<div class="g-content m_center">
+			<!-- s/头部导航区域 -->
+			<div class="game-nav">
+				<div class="nav-c m_center">
+					<div class="nav-logo fl">
+						<a class="logo-link" href="#">
+							<img class="logo-img" src="images/logo.png" alt="logo" />
+						</a>
+					</div>
+					<div class="nav-ul fl">
+						<a class="on" href="#">首页</a>
+						<a href="./game_list.html">游戏中心</a>
+						<a href="./user_center.html">个人中心</a>
+						<a href="./pay.html">充值中心</a>
+						<a href="#">客服中心</a>
+						<a href="#">游戏论坛</a>
+					</div>
+					<div class="nav-other fr">
+						<div class="nav-fav fl">
+							<a class="s-desk" href="javascript:;">
+								<i class="icon-base"></i>保存桌面
+							</a>
+							<a class="s-collect" href="javascript:;">
+								<i class="icon-base"></i>收藏首页
+							</a>
+						</div>
+						<div class="nav-login fl" style="display:none;">
+							<a href="javascript:;">登录</a>
+							<span>|</span>
+							<a href="javascript:;">注册</a>
+						</div>
+						<div class="nav-info fl" style="display:block;">
+							<img class="fl userimg" src="http://uc.douyutv.com/upload/avatar/face/201606/20/fc75a95d639426b4093a2791e7ab07d3_small.jpg" width="36" height="36" alt="" id="navInfoImg">							
+							<a class="fl username txt_overflow" href="javascript:;" title="火花易灭88" target="_blank">
+								火花易灭88SERERSD
+								<span class="icon-arrow"></span>
+							</a>
+						</div>
+						<div class="detail-info" style="display:none;">
+							<i class="tip-up">◆</i>
+							<dl class="info-data">
+								<dt>
+									<a href="javascript:;">火花易灭</a>
+								</dt>
+								<dd>
+									<a href="javascript:;">
+										<i class="icon-base icon-user"></i>
+										个人中心
+									</a>
+								</dd>
+								<dd>
+									<a href="javascript:;">
+										<i class="icon-base icon-pay"></i>
+										充值中心
+									</a>
+								</dd>
+								<dd>
+									<a href="javascript:;">
+										<i class="icon-base icon-exit"></i>
+										退出
+									</a>
+								</dd>
+							</dl>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- e/头部导航区域 -->
+			<!-- s/区域开始 -->
+			<div class="game-ad" id="game_ad">
+				<span class="tab-btn prev-btn"></span>
+				<span class="tab-btn next-btn"></span>
+				<div class="login-module">
+					<h3 class="top-tit"><span>用户登录</span></h3>
+					<div class="login-inp" style="display:block;">
+						<div class="error-tips">错误信息提示区域</div>
+						<p class="normal-box"><input placeholder="请输入昵称" type="text" /></p>
+						<p class="normal-box"><input placeholder="请输入密码" type="password" /></p>
+						<p class="normal-box inp-code">
+							<input class="fl" placeholder="请输入验证码" type="text" />
+							<img class="code fl" src="https://passport.douyu.com/api/captcha?v=1466488785274"  />
+						</p>
+						<p class="normal-box pw-tips"><a href="javascript:;">忘记密码？</a></p>
+						<p class="normal-box login-ctrl">
+							<a class="go-login fl" href="javascript:;">登录</a>
+							<a class="go-reg fr" href="javascript:;">注册</a>
+						</p>
+						<p class="normal-box last-inp">
+							<span>其他登录：</span>
+							<a class="icon-log icon-weixin"></a>
+							<a class="icon-log icon-qq"></a>
+							<a class="icon-log icon-sina"></a>
+						</p>
+					</div>
+					<div class="loginok-box" style="display:none;">
+						<p class="normal-box name-tips">
+							<span class="fl">您好：<a class="name" href="javascript:;">火花易灭</a></span>
+							<span class="fr"><a class="out" href="javascript:;">[退出]</a></span>
+						</p>
+						<p class="normal-box user-ctrl">
+							<a class="paycenter" href="javascript:;">充值中心</a>
+							<a class="usercenter" href="javascript:;">用户中心</a>
+						</p>
+						<p class="normal-box fb normal-txt">推荐您进入：</p>
+						<ul class="rec-games fb clearfix">
+							<li>
+								<div class="cell fl">
+									<img class="fl g-icon" src="http://image.wan.douyu.com/www/images/game/lycq/16_16.jpg"  />
+									<a class="fl g-tit" href="javascript:;">武神赵子龙</a>
+								</div>
+								<div class="cell fr">
+									<a href="javascript:;">群雄7服</a>&nbsp;&nbsp;
+									<a href="javascript:;">纵横四海</a>
+								</div>
+							</li>
+							<li>
+								<div class="cell fl">
+									<img class="fl g-icon" src="http://image.wan.douyu.com/www/images/game/lycq/16_16.jpg"  />
+									<a class="fl g-tit" href="javascript:;">武神赵子龙</a>
+								</div>
+								<div class="cell fr">
+									<a href="javascript:;">群雄7服</a>&nbsp;&nbsp;
+									<a href="javascript:;">纵横四海</a>
+								</div>
+							</li>
+							<li>
+								<div class="cell fl">
+									<img class="fl g-icon" src="http://image.wan.douyu.com/www/images/game/lycq/16_16.jpg"  />
+									<a class="fl g-tit" href="javascript:;">武神赵子龙</a>
+								</div>
+								<div class="cell fr">
+									<a href="javascript:;">群雄7服</a>&nbsp;&nbsp;
+									<a href="javascript:;">纵横四海</a>
+								</div>
+							</li>
+							<li>
+								<div class="cell fl">
+									<img class="fl g-icon" src="http://image.wan.douyu.com/www/images/game/lycq/16_16.jpg"  />
+									<a class="fl g-tit" href="javascript:;">武神赵子龙</a>
+								</div>
+								<div class="cell fr">
+									<a href="javascript:;">群雄7服</a>&nbsp;&nbsp;
+									<a href="javascript:;">纵横四海</a>
+								</div>
+							</li>
+							<li>
+								<div class="cell fl">
+									<img class="fl g-icon" src="http://image.wan.douyu.com/www/images/game/lycq/16_16.jpg"  />
+									<a class="fl g-tit" href="javascript:;">武神赵子龙</a>
+								</div>
+								<div class="cell fr">
+									<a href="javascript:;">群雄7服</a>&nbsp;&nbsp;
+									<a href="javascript:;">纵横四海</a>
+								</div>
+							</li>
+							<li>
+								<div class="cell fl">
+									<img class="fl g-icon" src="http://image.wan.douyu.com/www/images/game/lycq/16_16.jpg"  />
+									<a class="fl g-tit" href="javascript:;">武神赵子龙</a>
+								</div>
+								<div class="cell fr">
+									<a href="javascript:;">群雄7服</a>&nbsp;&nbsp;
+									<a href="javascript:;">纵横四海</a>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+				<ul class="ad-list">
+					<li class="current"><a data-img="http://image.wan.douyu.com/upload/2016/0525/201605251040024046.jpg" href="javascript:;"></a></li>
+					<li><a data-img="http://image.wan.douyu.com/upload/2016/0622/201606220909534699.jpg" href="javascript:;"></a></li>
+					<li><a data-img="http://image.wan.douyu.com/upload/2016/0623/201606230917597705.jpg" href="javascript:;"></a></li>
+					<li><a data-img="http://image.wan.douyu.com/upload/2016/0622/201606220638497912.jpg" href="javascript:;"></a></li>
+				</ul>
+				<div class="sort-dot"><!--
+					<span class="dot on"></span>
+					<span class="dot"></span>
+					<span class="dot"></span>
+					<span class="dot"></span>-->
+				</div>
+			</div>			
+			<!-- e/区域开始 -->
+			
+			<!-- s/主题区域 -->
+			<div class="game-container pb20_ie7 m_center">
+				<div class="hot-game">
+					<ul>
+						<li>
+							<a href="javascript:;">
+								<img src="http://image.wan.douyu.com/www/images/game/zzl/390_182.png" />
+							</a>
+							<div class="hot-mask">
+								<div class="game-tit fl">
+									<h4>武神赵子龙</h4>
+									<p>官网 | 背包</p>
+								</div>
+								<div class="game-play fr">
+									<a href="javascript:;">进去新区</a>
+									<a href="javascript:;">服务器列表</a>
+								</div>
+							</div>
+						</li>
+						<li>
+							<a href="javascript:;">
+								<img src="http://image.wan.douyu.com/www/images/game/zzl/390_182.png" />
+							</a>
+						</li>
+						<li>
+							<a href="javascript:;">
+								<img src="http://image.wan.douyu.com/www/images/game/zzl/390_182.png" />
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div class="game-list m-h-868 clearfix">
+					<div class="g-col-small fl">
+						<h4 class="module-title">
+							<i class="icon-index icon-server"></i>
+							开服列表
+							<a href="javascript:;" target="_blank" title="更多开服列表" class="more">更多 &gt;</a>
+							<span class="line"></span>
+						</h4>
+						<ul class="server-list clearfix">
+							<li class="hot-active">
+								<div class="col-1 fl">
+									<img class="thumb-img fl" src="http://image.wan.douyu.com/www/images/game/zzl/16_16.jpg"  />
+									<a href="javascript:;" class="g-tit fl">武神赵子龙</a>
+								</div>
+								<div class="col-2 fl">
+									<span class="time">06-22 09:00</span>
+								</div>
+								<div class="col-3 fl">
+									<a class="place" href="javascript:;">斗鱼64服</a>
+								</div>
+							</li>
+							<li>
+								<div class="col-1 fl">
+									<img class="thumb-img fl" src="http://image.wan.douyu.com/www/images/game/zzl/16_16.jpg"  />
+									<a href="javascript:;" class="g-tit fl">武神赵子龙</a>
+								</div>
+								<div class="col-2 fl">
+									<span class="time">06-22 09:00</span>
+								</div>
+								<div class="col-3 fl">
+									<a class="place" href="javascript:;">斗鱼64服</a>
+								</div>
+							</li>
+							<li>
+								<div class="col-1 fl">
+									<img class="thumb-img fl" src="http://image.wan.douyu.com/www/images/game/zzl/16_16.jpg"  />
+									<a href="javascript:;" class="g-tit fl">武神赵子龙</a>
+								</div>
+								<div class="col-2 fl">
+									<span class="time">06-22 09:00</span>
+								</div>
+								<div class="col-3 fl">
+									<a class="place" href="javascript:;">斗鱼64服</a>
+								</div>
+							</li>
+							<li>
+								<div class="col-1 fl">
+									<img class="thumb-img fl" src="http://image.wan.douyu.com/www/images/game/zzl/16_16.jpg"  />
+									<a href="javascript:;" class="g-tit fl">武神赵子龙</a>
+								</div>
+								<div class="col-2 fl">
+									<span class="time">06-22 09:00</span>
+								</div>
+								<div class="col-3 fl">
+									<a class="place" href="javascript:;">斗鱼64服</a>
+								</div>
+							</li>
+							<li>
+								<div class="col-1 fl">
+									<img class="thumb-img fl" src="http://image.wan.douyu.com/www/images/game/zzl/16_16.jpg"  />
+									<a href="javascript:;" class="g-tit fl">武神赵子龙</a>
+								</div>
+								<div class="col-2 fl">
+									<span class="time">06-22 09:00</span>
+								</div>
+								<div class="col-3 fl">
+									<a class="place" href="javascript:;">斗鱼64服</a>
+								</div>
+							</li>
+							<li>
+								<div class="col-1 fl">
+									<img class="thumb-img fl" src="http://image.wan.douyu.com/www/images/game/zzl/16_16.jpg"  />
+									<a href="javascript:;" class="g-tit fl">武神赵子龙</a>
+								</div>
+								<div class="col-2 fl">
+									<span class="time">06-22 09:00</span>
+								</div>
+								<div class="col-3 fl">
+									<a class="place" href="javascript:;">斗鱼64服</a>
+								</div>
+							</li>
+							<li>
+								<div class="col-1 fl">
+									<img class="thumb-img fl" src="http://image.wan.douyu.com/www/images/game/zzl/16_16.jpg"  />
+									<a href="javascript:;" class="g-tit fl">武神赵子龙</a>
+								</div>
+								<div class="col-2 fl">
+									<span class="time">06-22 09:00</span>
+								</div>
+								<div class="col-3 fl">
+									<a class="place" href="javascript:;">斗鱼64服</a>
+								</div>
+							</li>
+							<li>
+								<div class="col-1 fl">
+									<img class="thumb-img fl" src="http://image.wan.douyu.com/www/images/game/zzl/16_16.jpg"  />
+									<a href="javascript:;" class="g-tit fl">武神赵子龙</a>
+								</div>
+								<div class="col-2 fl">
+									<span class="time">06-22 09:00</span>
+								</div>
+								<div class="col-3 fl">
+									<a class="place" href="javascript:;">斗鱼64服</a>
+								</div>
+							</li>
+							<li>
+								<div class="col-1 fl">
+									<img class="thumb-img fl" src="http://image.wan.douyu.com/www/images/game/zzl/16_16.jpg"  />
+									<a href="javascript:;" class="g-tit fl">武神赵子龙</a>
+								</div>
+								<div class="col-2 fl">
+									<span class="time">06-22 09:00</span>
+								</div>
+								<div class="col-3 fl">
+									<a class="place" href="javascript:;">斗鱼64服</a>
+								</div>
+							</li>
+						</ul>
+						<div class="small-ad">
+							<a href="javascript:;">
+								<img src="http://image.wan.douyu.com/upload/2016/0503/201605031158404623.jpg"  />
+							</a>
+						</div>
+						<div class="game-news">
+							<h4 class="module-title">
+								<i class="icon-index icon-news"></i>
+								开服列表
+								<a href="javascript:;" target="_blank" title="更多开服列表" class="more">更多 &gt;</a>
+								<span class="line"></span>
+							</h4>
+							<ul class="news-list">
+								<li><a href="javascript:;">剑雨江湖斗鱼31服6月22日9点火爆开启</a></li>
+								<li><a href="javascript:;">蓝月传奇斗鱼2服6月22日9点火爆开启</a></li>
+								<li><a href="javascript:;">武神赵子龙斗鱼63服6月22日9点火爆开启</a></li>
+								<li><a href="javascript:;">剑雨江湖斗鱼30服6月21日9点火爆开启</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="g-col-big fr">
+						<h4 class="module-title">
+							<i class="icon-index icon-first"></i>
+							推荐游戏
+							<a href="javascript:;" target="_blank" title="更多开服列表" class="more">更多 &gt;</a>
+							<span class="line"></span>
+						</h4>
+						<ul class="reco-list clearfix">
+							<li>
+								<div class="img-link">
+									<a href="javascript:;">
+										<img src="http://image.wan.douyu.com/www/images/game/lycq/272_136.png"  />
+										
+										<span class="icon-index icon-new"></span>
+									</a>
+								</div>
+								<div class="reco-desc">
+									<a href="javascript:;" class="link-tit">蓝月传奇</a>
+									<a href="javascript:;" class="link-tag">官网</a>
+									<a href="javascript:;" class="link-tag">开始游戏</a>
+								</div>
+							</li>
+							<li>
+								<div class="img-link">
+									<a href="javascript:;">
+										<img src="http://image.wan.douyu.com/www/images/game/lycq/272_136.png"  />
+										
+										<span class="icon-index icon-new"></span>
+									</a>
+								</div>
+								<div class="reco-desc">
+									<a href="javascript:;" class="link-tit">蓝月传奇</a>
+									<a href="javascript:;" class="link-tag">官网</a>
+									<a href="javascript:;" class="link-tag">开始游戏</a>
+								</div>
+							</li>
+							<li>
+								<div class="img-link">
+									<a href="javascript:;">
+										<img src="http://image.wan.douyu.com/www/images/game/lycq/272_136.png"  />
+										
+										<span class="icon-index icon-new"></span>
+									</a>
+								</div>
+								<div class="reco-desc">
+									<a href="javascript:;" class="link-tit">蓝月传奇</a>
+									<a href="javascript:;" class="link-tag">官网</a>
+									<a href="javascript:;" class="link-tag">开始游戏</a>
+								</div>
+							</li>
+							<li>
+								<div class="img-link">
+									<a href="javascript:;">
+										<img src="http://image.wan.douyu.com/www/images/game/lycq/272_136.png"  />
+										
+										<span class="icon-index icon-hot"></span>
+									</a>
+								</div>
+								<div class="reco-desc">
+									<a href="javascript:;" class="link-tit">蓝月传奇</a>
+									<a href="javascript:;" class="link-tag">官网</a>
+									<a href="javascript:;" class="link-tag">开始游戏</a>
+								</div>
+							</li>
+							<li>
+								<div class="img-link">
+									<a href="javascript:;">
+										<img src="http://image.wan.douyu.com/www/images/game/lycq/272_136.png"  />
+										
+										<span class="icon-index icon-new"></span>
+									</a>
+								</div>
+								<div class="reco-desc">
+									<a href="javascript:;" class="link-tit">蓝月传奇</a>
+									<a href="javascript:;" class="link-tag">官网</a>
+									<a href="javascript:;" class="link-tag">开始游戏</a>
+								</div>
+							</li>
+							<li>
+								<div class="img-link">
+									<a href="javascript:;">
+										<img src="http://image.wan.douyu.com/www/images/game/lycq/272_136.png"  />
+										
+										<span class="icon-index icon-new"></span>
+									</a>
+								</div>
+								<div class="reco-desc">
+									<a href="javascript:;" class="link-tit">蓝月传奇</a>
+									<a href="javascript:;" class="link-tag">官网</a>
+									<a href="javascript:;" class="link-tag">开始游戏</a>
+								</div>
+							</li>
+							<li>
+								<div class="img-link">
+									<a href="javascript:;">
+										<img src="http://image.wan.douyu.com/www/images/game/lycq/272_136.png"  />
+										
+										<span class="icon-index icon-new"></span>
+									</a>
+								</div>
+								<div class="reco-desc">
+									<a href="javascript:;" class="link-tit">蓝月传奇</a>
+									<a href="javascript:;" class="link-tag">官网</a>
+									<a href="javascript:;" class="link-tag">开始游戏</a>
+								</div>
+							</li>
+							<li>
+								<div class="img-link">
+									<a href="javascript:;">
+										<img src="http://image.wan.douyu.com/www/images/game/lycq/272_136.png"  />
+										
+										<span class="icon-index icon-new"></span>
+									</a>
+								</div>
+								<div class="reco-desc">
+									<a href="javascript:;" class="link-tit">蓝月传奇</a>
+									<a href="javascript:;" class="link-tag">官网</a>
+									<a href="javascript:;" class="link-tag">开始游戏</a>
+								</div>
+							</li>
+							<li>
+								<div class="img-link">
+									<a href="javascript:;">
+										<img src="http://image.wan.douyu.com/www/images/game/lycq/272_136.png"  />
+										
+										<span class="icon-index icon-new"></span>
+									</a>
+								</div>
+								<div class="reco-desc">
+									<a href="javascript:;" class="link-tit">蓝月传奇</a>
+									<a href="javascript:;" class="link-tag">官网</a>
+									<a href="javascript:;" class="link-tag">开始游戏</a>
+								</div>
+							</li>
+							<li>
+								<div class="img-link">
+									<a href="javascript:;">
+										<img src="http://image.wan.douyu.com/www/images/game/lycq/272_136.png"  />
+										
+										<span class="icon-index icon-new"></span>
+									</a>
+								</div>
+								<div class="reco-desc">
+									<a href="javascript:;" class="link-tit">蓝月传奇</a>
+									<a href="javascript:;" class="link-tag">官网</a>
+									<a href="javascript:;" class="link-tag">开始游戏</a>
+								</div>
+							</li>
+							<li>
+								<div class="img-link">
+									<a href="javascript:;">
+										<img src="http://image.wan.douyu.com/www/images/game/lycq/272_136.png"  />
+										
+										<span class="icon-index icon-new"></span>
+									</a>
+								</div>
+								<div class="reco-desc">
+									<a href="javascript:;" class="link-tit">蓝月传奇</a>
+									<a href="javascript:;" class="link-tag">官网</a>
+									<a href="javascript:;" class="link-tag">开始游戏</a>
+								</div>
+							</li>
+							<li>
+								<div class="img-link">
+									<a href="javascript:;">
+										<img src="http://image.wan.douyu.com/www/images/game/lycq/272_136.png"  />
+										
+										<span class="icon-index icon-new"></span>
+									</a>
+								</div>
+								<div class="reco-desc">
+									<a href="javascript:;" class="link-tit">蓝月传奇</a>
+									<a href="javascript:;" class="link-tag">官网</a>
+									<a href="javascript:;" class="link-tag">开始游戏</a>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+				
+				
+			</div>
+			<!-- e/主体区域 -->
+			
+			<div class="game-footer">
+				<p class="nav-link">
+					<a href="javascript:;">斗鱼直播</a> |
+					<a href="javascript:;">游戏中心</a> |
+					<a href="javascript:;">客服中心</a> |
+					<a href="javascript:;">家长监控</a>
+				</p>
+				<p>
+					<a href="javascript:;">皖网文(2012)0586-009号</a>&nbsp;&nbsp;<a href="javascript:;">ICP证 皖B2-20160015</a>
+				</p>
+				<p>抵制不良游戏　拒绝盗版游戏　注意自我保护　谨防受骗上当　适度游戏益脑　沉迷游戏伤身　合理安排时间　享受健康生活</p>
+			</div>
+		</div>
+		<div class="common-mask"></div>
+		<div class="login-popup">
+			<h3 class="tit"><span>提示信息</span><a href="javascript:;">×</a></h3>
+			<p class="content">我是文字内容我是文字内容我是文字内容我是文字内容我是文字内容我是文字内容我是文字内容我是文字内容</p>
+			<p class="btn-ctrl"><a href="javascript:;">确定</a></p>
+		</div>
+	</body>
+</html>

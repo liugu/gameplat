@@ -1,0 +1,6 @@
+default目录为项目的真实目录
+
+default2目录为wanCMS系统的备份工作目录
+
+
+default2目录只是为defalut目录对接功能时提供参考，后期不需要可以将default2目录删除

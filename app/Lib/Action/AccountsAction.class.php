@@ -8,7 +8,7 @@
    * 
    * @package app
    */
-Vendor ( 'Ucenter.UcApi' );
+// Vendor ( 'Ucenter.UcApi' );
 class AccountsAction extends Action {
 	public function idcard_check() {
 		if (! idcard_checksum18 ( $_GET ['id'] )) {
@@ -469,11 +469,187 @@ public function username_check2() {
 			$this->success ( '注册成功,系统正在为你登陆中..' . $ucsynlogin, '/', '3' );
 		}
 	}
+
+
+	/**
+	 *
+	 * @name 注册模块
+	 * @todo 实现注册(不整合UC)
+	 */
+	public function do_register2() {
+		$verify_code = trim($_POST['approve_code']);
+		$referer = $_POST ['referer'];
+		
+		// 手机号码/用户名  user_name    
+		// 短信/普通验证码  approve_code   
+		// 密码 user_pwd   
+		// 确认密码  user_repwd   
+		// 同意勾选  is_agree  (值为0或者1)
+		// type  1  用户名注册  2 手机号注册
+
+		$username = trim ( $_POST ['user_name'] );
+		$password = trim ( $_POST ['user_pwd'] );
+		$type = trim($_POST['type']);
+		$is_agree = trim($_POST['is_agree']);
+
+
+		//测试数据 手机注册
+		// $username = '15756984521';
+		// $password = '123456';
+		// $type = 2;
+		// $is_agree = 1;
+		
+		$userinfo_model = M('userinfo',null);
+		$nickname = $type==1 ? $username . rand(100, 999) : '手机用户' . rand(1000, 9999);
+		if ($type==2) { //手机号注册
+
+			$phone = $username;  //存储手机号 
+
+			$userinfo_model = M('userinfo',null);
+			$where = array('phone'=>$username,'status'=>2);
+			$userinfo = $userinfo_model->where($where)->find();
+			if($userinfo){
+				// print_r($user_model->getLastSql());die;
+				$this->error ( '该手机号已注册!' );
+				return;
+			}else{
+
+				if(!verify_msg_code($phone,$verify_code)){ //短信验证码验证
+					$this->error('短信验证码错误！'); 
+				}
+				//创建用户名 昵称
+				$username = '58' . uniqid();
+			}
+		}
+		// $email = trim ( $_POST ['email'] );
+		// $nickname = trim ( $_POST ['nickname'] );
+		// $truename = trim ( $_POST ['true_name'] );
+		// $idcard = trim ( $_POST ['idcard'] );
+		
+		if($type == 1){
+			if($_SESSION['verify'] != md5($verify_code)) {
+				$this->error('验证码错误'); 
+			}
+		}
+		
+
+		if (! preg_match ( "/^([a-zA-Z0-9]|[._]){5,22}$/", $username )) {
+			$this->error ( '您提交的数据有误:用户名非法,请检查您的输入!' );
+		}
+		if (strlen ( $password ) < 6 || strlen ( $password ) > 22 || $password == "") {
+			$this->error ( '您提交的数据有误:密码长度为6到22位的字符,请检查您的输入!' );
+		}
+		// if (! preg_match ( "/\b(^(\S+@).+((\.com)|(\.net)|(\.org)|(\.info)|(\.edu)|(\.mil)|(\.gov)|(\.biz)|(\.ws)|(\.us)|(\.tv)|(\.cc)|(\..{2,2}))$)\b/", $email )) {
+		// 	$this->error ( '您提交的数据有误:邮箱格式不正确,请检查您的输入!' );
+		// }
+		// if ($nickname == "" || strlen ( $nickname ) > 20) {
+		// 	$this->error ( '您提交的数据有误:昵称为空或者长度不正确,请检查您的输入!' );
+		// }
+		// if ($truename == "" || strlen ( $truename ) < 6 || strlen ( $truename ) > 12 || ! isChineseName ( $truename )) {
+		// 	$this->error ( '您提交的数据有误:真实名称不正确,请检查您的输入!' );
+		// }
+		// if ($idcard == "" || ! idcard_checksum18 ( $idcard )) {
+		// 	$this->error ( '您提交的数据有误:身份证号码不正确,请检查您的输入!' );
+		// }
+		
+		// 注册
+		//用户名是否重复
+		$user_model = M('user',null);
+		$where = array('username'=>$username);
+		$user = $user_model->where($where)->find();
+		if($user){
+			// print_r($user_model->getLastSql());die;
+			$this->error ( '用户名已经存在！,请检查您的输入!' );
+			return;
+		}else{
+
+			// 更新用户相关表  user  members
+			$salt = substr(uniqid(rand()), -6);
+			$password = md5(md5($password).$salt);
+			$data = array(
+				'username'=>$username,
+				'nickname'=>$nickname,
+				'password'=>$password,
+				'salt'=>$salt,
+				'user_type'=>'user',
+				'created_at' => date("Y-m-d H:i:s"),
+				'created_ip' => get_client_ip(0,true),
+			);
+			$user_model->create($data);
+			$res = $user_model->add();
+			if($res){
+
+				if($type == 1){//绑定手机号
+
+					$atts = array(
+						'id'=>$res->id,
+						'phone'=>$phone,
+						'phone_status'=>2,
+					);
+					$userinfo_model ->create($atts);
+					$userinfo_model->add();
+
+				}
+				$userinfo ['username'] = $username;
+				$userinfo ['nickname'] = $nickname;
+				$userinfo ['email'] = '';
+				$userinfo ['point'] = "0";
+				$userinfo ['id_card'] = '';
+				$userinfo ['uid'] = $res;
+				$model = M ( 'member' );
+				$st = $model->data ( $userinfo )->add ();
+				if (! $st) {
+					$this->error ( '系统发生错误,请稍候重试' );
+				} else {
+					$extends_info ['uid'] = $res;
+					$extends_info ['register_time'] = time ();
+					$extends_info ['register_ip'] = get_client_ip ();
+					$extends_info ['lastlogin_time'] = time ();
+					$extends_info ['lastlogin_ip'] = get_client_ip ();
+					$extends_info ['realname'] = '';
+					$extends_info ['from_soical'] = '';
+					
+					$extend = M ( 'member_extend_info' );
+					$s = $extend->data ( $extends_info )->add ();
+					if (! $s) {
+						$this->error ( '系统发生错误,请稍候重试' );
+					}
+				}
+				
+				setcookie ( C ( 'COOKIE_PREFIX' ) . 'auth', 0, 0, C ( 'COOKIE_PATH' ), C ( 'COOKIE_DOMAIN' ), 0, false );
+				$_SESSION ['uid'] = $uid;
+				$_SESSION ['user'] = $userinfo;
+				//与主站统一格式,便于共享登录信息
+				$_SESSION['id'] = $res;
+				$_SESSION['username'] = $username;
+				$_SESSION['password'] = '';
+				$_SESSION['nickname'] = $nickname;
+				$_SESSION['is_logged'] = 1;
+
+				$this->success ( '注册成功,系统正在为你登陆中..' , '/', '3' );
+
+				// $arr ['msg'] = '注册成功,系统正在为你登陆中..';
+				// $arr ['state'] = '1';
+				// $arr ['info'] = 'login';
+				// $arr ['returnu'] = '/';
+				// die ( json_encode ( $arr ) );
+
+			}else{
+				$this->error ( '发生未知错误，请稍后重试!' );
+			}
+		}
+
+	}
 	public function loginout() {
-		unset ( $_SESSION ['uid'] );
-		unset ( $_SESSION ['member'] );
+		unset ( $_SESSION['id']);
+		unset ( $_SESSION ['user'] );
+		unset ( $_SESSION ['role_id'] );
+		unset ( $_SESSION ['group'] );
+		unset ( $_SESSION ['administrator'] );
+		unset ( $_SESSION ['password'] );
+		unset ( $_SESSION ['nickname'] );
+		$_SESSION['is_logged'] = 0;
 		cookie ( 'auth', '1' );
-		$html = uc_user_synlogout ();
 		$this->success ( '用户登出成功..' . $html, '/', '2' );
 	}
 	public function login() {
@@ -733,116 +909,147 @@ public function username_check2() {
 	public function checklogin() {
 		$username = trim ( $_POST ['user_name'] );
 		$password = trim ( $_POST ['user_pwd'] );
-		$url = $_POST ['return'];
-		if ($username == "" || $password == "") {
+		$verify   = trim ( $_POST ['user_verify'] );
+		$type     = trim ($_POST['type']); // 用户名登录 1  手机号登录  2
+		$url = $_POST ['user_url'] ==''? '/' : trim($_POST ['user_url']);
+
+		if ($username == "" || $password == "" || $verify =="") {
 			$arr ['msg'] = '请完善您的账号密码再进行登录!';
 			$arr ['state'] = '-6';
 			$arr ['info'] = 'login';
 			die ( json_encode ( $arr ) );
 		}
-		
-	//判断该用户是否被锁定
-		$member = M ( 'member' );
-		$u_info = $member->where ( "username ='" . $username . "'" )->find ();
-		if ($u_info['user_status']=='1') {
-			$arr ['msg'] = '您的账户已被锁定，请联系客服！';
+
+		// print_r($verify);echo "<br>";
+		// print_r($_SESSION['verify']);echo "<br>";
+		// print_r(md5($verify ));die;
+		if($_SESSION['verify'] != md5($verify )){
+			$arr ['msg'] = '验证码错误!';
 			$arr ['state'] = '-6';
 			$arr ['info'] = 'login';
 			die ( json_encode ( $arr ) );
 		}
+		//判断该用户是否被锁定
+		// $member = M ( 'member' );
+		// $u_info = $member->where ( "username ='" . $username . "'" )->find ();
+		// if ($u_info['user_status']=='1') {
+		// 	$arr ['msg'] = '您的账户已被锁定，请联系客服！';
+		// 	$arr ['state'] = '-6';
+		// 	$arr ['info'] = 'login';
+		// 	die ( json_encode ( $arr ) );
+		// }
 		
-		list ( $uid, $username, $password, $email ) = uc_user_login ( $username, $password );
-		if ($uid > 0) {
-			
-			
-			//若是用户在uc中存在，在本程序中不存在则注册
-			$u_info = $member->where ( "username ='" . $username . "'" )->find ();
-			if(empty($u_info)){
-			$userinfo ['username'] = $username;
-			$userinfo ['nickname'] = $username;
-			$userinfo ['email'] = $email;
-			$userinfo ['point'] = "0";
-			$userinfo ['id_card'] = '';
-			$userinfo ['uid'] = $uid;
-			$model = M ( 'member' );
-			$st = $model->data ( $userinfo )->add ();
-			if (! $st) {
-				$this->error ( '系统发生错误,请稍候重试' );
-			} else {
-				$extends_info ['uid'] = $uid;
-				$extends_info ['register_time'] = time ();
-				$extends_info ['register_ip'] = get_client_ip ();
-				$extends_info ['lastlogin_time'] = time ();
-				$extends_info ['lastlogin_ip'] = get_client_ip ();
-				$extends_info ['realname'] = '';
-				$extends_info ['from_soical'] = 'uc';
-			
-				$extend = M ( 'member_extend_info' );
-				$s = $extend->data ( $extends_info )->add ();
-				if (! $s) {
-					$this->error ( '系统发生错误,请稍候重试' );
-				}
-			}}
-			
-			
-			// 记录成功日志
-			// 设置cookies
-			setcookie ( C ( 'COOKIE_PREFIX' ) . 'auth', uc_authcode ( $uid . "\t" . $username, 'ENCODE' ), 0, C ( 'COOKIE_PATH' ), C ( 'COOKIE_DOMAIN' ), 0, false );
-			/**
-			 * **********************************
-			 */
-			// 防止本机注册
-			import ( "@.ORG.Getmacaddr" );
-			$mac = new GetMacAddr ( PHP_OS );
-			$ip = get_client_ip ();
-			$macaddr = $mac->mac_addr;
-			setcookie ( "gameplf_anti_csrf", md5 ( $macaddr ), time () + 3600 * 24, "/" );
-			setcookie ( "login_check_ip", md5 ( $ip ), time () + 3600 * 24, "/" );
-			/**
-			 * **********************************
-			 */
-			// 同步登录
-			$ucsynlogin = uc_user_synlogin ( $uid );
-			$_SESSION ['uid'] = $uid;
-			$_SESSION ['member'] = $username;
-			
-			$url = $_POST ['url'];
-			if ($url == "") {
-				$arr ['msg'] = '登陆成功,系统自动为你跳转到首页';
-				$arr ['script'] = $ucsynlogin;
-				$arr ['state'] = '1';
+		//手机号登录 拐弯处理
+		if($type==2){
+			$userinfo = M('userinfo',null);
+			$where = array(
+				'phone'=>$username,
+				'phone_status'=>2,
+			);
+			$userinfo_record = $userinfo->where($where)->find();
+			if(!$userinfo_record){
+				$arr ['msg'] = '该手机号未查询到绑定用户！';
+				$arr ['state'] = '-6';
 				$arr ['info'] = 'login';
-				die ( json_encode ( $arr ) );
-			} else {
-				$member = M ( "member_extend_info" ); // 实例化member_extend_info对象
-				$map ['lastlogin_ip'] = get_client_ip ();
-				$map ['lastlogin_time'] = time ();
-				$member = M ( "member_extend_info" ); // 实例化member_extend_info对象
-				$member->where ( 'uid = ' . $uid )->save ( $map ); // 根据条件保存修改的数据
-				
-				$arr ['msg'] = '登陆成功,系统自动为你跳转到您登陆前的页面';
-				$arr ['script'] = $ucsynlogin;
-				$arr ['state'] = '1';
-				$arr ['info'] = 'login';
-				$arr ['returnu'] = $url;
 				die ( json_encode ( $arr ) );
 			}
-		} elseif ($uid == - 1) {
-			$arr ['msg'] = '用户名不存在,或者被删除!'.$uid;
-			$arr ['state'] = '-1';
-			$arr ['info'] = 'login';
-			die ( json_encode ( $arr ) );
-		} elseif ($uid == - 2) {
-			$arr ['msg'] = '对不起,用户密码错误!';
-			$arr ['state'] = '-2';
-			$arr ['info'] = 'login';
-			die ( json_encode ( $arr ) );
-		} else {
-			$arr ['msg'] = '未知错误,请重新登录!';
-			$arr ['state'] = '-3';
-			$arr ['info'] = 'login';
-			die ( json_encode ( $arr ) );
+			$user_id = $userinfo_record['id'];
+
+			$user = M('user',null);
+			$user_record = $user->where(array('id'=>$user_id))->find();
+			if(!$user_record){
+				$arr ['msg'] = '用户不存在！';
+				$arr ['state'] = '-6';
+				$arr ['info'] = 'login';
+				die ( json_encode ( $arr ) );
+			}
+
+			$username = $user_record['username'];
 		}
+		$where = array();
+		$where['username']=$username;
+		$user =  M('user',null);
+		$result = $user->where($where)->find();
+		if (!$result) {
+				$arr ['msg'] = '用户不存在！';
+				$arr ['state'] = '-6';
+				$arr ['info'] = 'login';
+				die ( json_encode ( $arr ) );
+		}
+		if(sp_compare_password($password, $result['password'],$result['salt'])){
+		    $_SESSION["user"]=$result;
+		    $_SESSION['user']['uid'] = $result['id'];
+
+		    //与主站统一格式,便于共享登录信息
+		    $_SESSION['id'] = $result['id'];
+		    $_SESSION['username'] = $result['username'];
+		    $_SESSION['password'] = $result['password'];
+		    $_SESSION['nickname'] = $result['nickname'];
+		    $_SESSION['is_logged'] = 1;
+
+		    //写入此次登录信息
+		    // $data = array(
+		    //     'last_login_at' => date("Y-m-d H:i:s"),
+		    //     'last_login_ip' => get_client_ip(0,true),
+		    // );
+		    // $user->where("id=".$result["id"])->save($data);
+			
+			//游戏单独用户信息表
+			$model = M('Member');
+			$userinfo = $model->where(array('uid'=>$result['id']))->find();
+			if(!$userinfo){
+				$data = array(
+					'uid'=>$result['id'],
+					'nickname'=>$result['nickname'],
+					'username'=>$result['username'],
+				);
+				$r =  $model->create($data);
+				$model->add();
+				$data2 =array(
+					'uid'=>$result['id'],
+					'lastlogin_time' => date("Y-m-d H:i:s"),
+				    'lastlogin_ip' => get_client_ip(0,true),
+				);
+				$member_extend_info =  D('member_extend_info');
+				$member_extend_info->create($data2);
+				$member_extend_info->add();
+			}else{
+				$data = array(
+					'nickname'=>$result['nickname'],
+					'username'=>$result['username'],
+				);
+				$model->where(array('uid'=>$result['id']))->save($data);
+				$data2 =array(
+					'uid'=>$result['id'],
+					'lastlogin_time' => date("Y-m-d H:i:s"),
+				    'lastlogin_ip' => get_client_ip(0,true),
+				);
+				$member_extend_info =  M('member_extend_info');
+				$member_extend_info->create($data2);
+				$member_extend_info->add();
+			}
+			if ($url == "") {
+				$arr ['msg'] = '登陆成功,系统自动为你跳转到首页';
+				$arr ['state'] = '1';
+				$arr ['info'] = 'login';
+				die ( json_encode ( $arr ) );
+			} else {
+				
+				$arr ['msg'] = '登陆成功,系统自动为你跳转到您登陆前的页面';
+				$arr ['state'] = '1';
+				$arr ['info'] = 'login';
+				$arr ['return_url'] = $url;
+
+				
+				die ( json_encode ( $arr ) );
+			}
+		}else{
+		    $arr ['msg'] = '用户名或密码错误！';
+		    $arr ['state'] = '-6';
+		    $arr ['info'] = 'login';
+		    die ( json_encode ( $arr ) );
+		}
+	
 	}
 }
 ?>

@@ -8,12 +8,11 @@
       * 
       * @author lostman $ (leefongyun@gmail.com)
       */
-        Vendor('Ucenter.UcApi');
 	    class CommonAction extends Action
 		{
 			protected  $userinfo,$game_log;
 			final public function _initialize()
-			{
+			{	
 				if(C('BLACK_LIST')=="on"){
 				$map['ip'] = get_client_ip();
 				$model = M('web_not_allow_ip');
@@ -32,14 +31,11 @@
 		        	die($profile['close_notice']);
 		        }
 		    
-		   
 		    
-		        if($_COOKIE['auth'])
+		        if(!$_COOKIE['auth'] && $_SESSION['is_logged']==1)
 		        {
-		        	list ($uid,$username) = explode ("\t",uc_authcode($_COOKIE['auth'],'DECODE'));
-		        	if($data = uc_get_user($username)) {
-		        		list($uid, $username, $email) = $data;
-		        	}
+		        	$uid = $_SESSION['id'];
+		        	$username = $_SESSION['user']['username'];
 		        	if($uid==""||$username=="")
 		        	{
 		        	// 用户权限检查
@@ -72,7 +68,9 @@
 		        	//读取用户信息
 		        	$model = D('MemberView');
 		        	$member_info = $model->where("member.uid={$uid}")->find();
-
+		        	
+		        	$user_model = M('user',null);
+		        	$user =  $user_model->where(array('id'=>$uid))->find();
 		        	if(!$member_info){
 		        		$add_member_info['uid'] = $uid;
 		        		$add_member_info['username'] = $username;
@@ -81,18 +79,20 @@
 		        		$return = $model->add($add_member_info);
 		        		if($return > 0){
 		        			$this->userinfo = $model->where("uid={$uid}")->find();
+		        			$this->userinfo['icon'] = $user['icon'];
 		        			$this->assign('userinfo',$this->userinfo);
 		        		}
 		        	}else{
 		        		$this->userinfo = $member_info;
+		        		$this->userinfo['icon'] = $user['icon'];
 		        		$this->assign('userinfo',$this->userinfo);
 		        	}
-		        	
-		        
+
 		        }
 		        else
 		        { 
-		        	unset($_SESSION);
+		        	// print_r($_SESSION);die;
+		        	// unset($_SESSION);
 		        	// 用户权限检查
 		        	if (C('USER_AUTH_ON') && !in_array(MODULE_NAME, explode(',', C('NOT_AUTH_MODULE'))))
 		        	{
